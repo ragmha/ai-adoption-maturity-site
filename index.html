@@ -122,11 +122,23 @@
 
     .disclaimer {
       max-width: 900px;
-      margin: 0 0 14px;
-      padding-left: 12px;
-      border-left: 3px solid var(--cp-accent);
-      color: var(--cp-text-muted);
-      font-size: 0.9rem;
+      margin: 18px 0;
+      padding: 16px 18px;
+      border: 2px solid var(--cp-accent);
+      border-radius: 0.625rem;
+      background: var(--cp-accent-soft);
+      color: var(--cp-text);
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .disclaimer strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--cp-accent);
+      font-size: 1.05rem;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
     }
 
     .meta {
@@ -410,7 +422,7 @@
       <div>
         <h1>Steps of AI Adoption</h1>
         <p class="subtitle">A Microsoft and GitHub capability map for moving from controlled access to intent-driven enterprise automation.</p>
-        <p class="disclaimer"><strong>Independent assessment solution:</strong> this is not an official Microsoft, GitHub or joint recommendation. It is a proposed maturity framework for enterprise discussion. Capabilities, availability and licensing reflect the assessment date and must be validated against current product documentation.</p>
+        <p class="disclaimer"><strong>Important — not an official recommendation</strong>This independent assessment is not an official Microsoft, GitHub or joint recommendation, endorsement or product roadmap. It is a proposed framework for enterprise discussion about AI-adoption maturity. Organizations must validate capabilities, availability, licensing and governance requirements against current official documentation.</p>
         <div class="meta">
           <span class="chip">Microsoft + GitHub platform</span>
           <span class="chip">Assessment: Aug 7, 2026</span>
@@ -672,11 +684,6 @@
       </table>
     </div>
 
-    <aside class="footnotes">
-      <p><strong>Assessment boundary:</strong> GitHub can provide the software-work execution and assurance plane through repositories, branches, pull requests, Actions, review and security. Microsoft provides the broader orchestration, identity, governance, observability and cost-control plane required at higher maturity.</p>
-      <p><strong>Data residency:</strong> GitHub documents Copilot data residency for US and EU/EFTA regions when administrators explicitly restrict Copilot to compliant models. Combine this with Azure regional deployments, allowed-location policies, private networking, encryption, Purview classification and documented retention. Preview features and external MCP services remain separate data-flow decisions.</p>
-      <p><strong>Evidence policy:</strong> capability and maturity labels are based on GitHub Docs and the <a href="https://github.blog/changelog/" target="_blank" rel="noreferrer">GitHub Changelog</a>. Generally available, preview and roadmap items are kept distinct. GitHub Actions runner capacity is not treated as Copilot-agent concurrency.</p>
-    </aside>
   </main>
 
   <script>
