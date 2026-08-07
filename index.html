@@ -1,0 +1,701 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Steps of AI Adoption — Microsoft & GitHub</title>
+  <script>
+    (() => {
+      const param = new URLSearchParams(window.location.search).get("scoutTheme");
+      const theme =
+        param || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      document.documentElement.setAttribute("data-theme", theme);
+    })();
+  </script>
+  <style>
+    :root {
+      color-scheme: light;
+      --cp-bg: #f7f4ef;
+      --cp-bg-elevated: #fcfbf8;
+      --cp-surface: #ffffff;
+      --cp-surface-soft: #f5f5f5;
+      --cp-border: #dedede;
+      --cp-border-strong: #919191;
+      --cp-text: #242424;
+      --cp-text-muted: #5c5c5c;
+      --cp-text-soft: #6f6f6f;
+      --cp-accent: #b11f4b;
+      --cp-accent-hover: #9a1a41;
+      --cp-accent-soft: rgba(177, 31, 75, 0.08);
+      --cp-accent-fg: #ffffff;
+      --cp-success: #16a34a;
+      --cp-danger: #dc2626;
+      --cp-warning: #f59e0b;
+      --cp-link: #0078d4;
+      --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.12);
+      --cp-overlay: rgba(255, 255, 255, 0.8);
+      --cp-panel: rgba(255, 255, 255, 0.86);
+      --cp-panel-strong: rgba(255, 255, 255, 0.96);
+      --cp-sheen: rgba(255, 255, 255, 0.55);
+      --cp-highlight: rgba(177, 31, 75, 0.12);
+    }
+    html[data-theme="dark"] {
+      color-scheme: dark;
+      --cp-bg: #3d3b3a;
+      --cp-bg-elevated: #343231;
+      --cp-surface: #292929;
+      --cp-surface-soft: #2e2e2e;
+      --cp-border: #474747;
+      --cp-border-strong: #5f5f5f;
+      --cp-text: #dedede;
+      --cp-text-muted: #919191;
+      --cp-text-soft: #b0b0b0;
+      --cp-accent: #fd8ea1;
+      --cp-accent-hover: #fb7b91;
+      --cp-accent-soft: rgba(253, 142, 161, 0.14);
+      --cp-accent-fg: #1a1a1a;
+      --cp-success: #4ade80;
+      --cp-danger: #f87171;
+      --cp-warning: #fbbf24;
+      --cp-link: #4da6ff;
+      --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.32);
+      --cp-overlay: rgba(41, 41, 41, 0.88);
+      --cp-panel: rgba(41, 41, 41, 0.72);
+      --cp-panel-strong: rgba(41, 41, 41, 0.96);
+      --cp-sheen: rgba(255, 255, 255, 0.04);
+      --cp-highlight: rgba(253, 142, 161, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--cp-bg-elevated);
+      color: var(--cp-text);
+      font-family: "Segoe UI", Aptos, Calibri, -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 16px;
+      line-height: 1.45;
+    }
+
+    a {
+      color: var(--cp-link);
+      text-underline-offset: 3px;
+    }
+
+    a:hover {
+      color: var(--cp-accent);
+    }
+
+    .page {
+      width: min(1580px, calc(100% - 48px));
+      margin: 0 auto;
+      padding: 48px 0 72px;
+    }
+
+    .masthead {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      line-height: 1.05;
+      letter-spacing: -0.035em;
+    }
+
+    .subtitle {
+      max-width: 780px;
+      margin: 0 0 14px;
+      color: var(--cp-text-soft);
+      font-size: 1.05rem;
+    }
+
+    .disclaimer {
+      max-width: 900px;
+      margin: 0 0 14px;
+      padding-left: 12px;
+      border-left: 3px solid var(--cp-accent);
+      color: var(--cp-text-muted);
+      font-size: 0.9rem;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .chip,
+    .theme-button {
+      border: 1px solid var(--cp-border);
+      border-radius: 0.625rem;
+      background: var(--cp-surface);
+      color: var(--cp-text);
+      font: inherit;
+      font-size: 0.875rem;
+      padding: 7px 10px;
+    }
+
+    .theme-button {
+      display: inline-grid;
+      width: 42px;
+      height: 42px;
+      place-items: center;
+      padding: 0;
+      cursor: pointer;
+    }
+
+    .theme-button:hover {
+      border-color: var(--cp-accent);
+      background: var(--cp-accent-soft);
+    }
+
+    .theme-button:focus-visible {
+      outline: 2px solid var(--cp-accent);
+      outline-offset: 3px;
+    }
+
+    .theme-icon {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+    }
+
+    .sun-icon {
+      display: none;
+    }
+
+    html[data-theme="dark"] .sun-icon {
+      display: block;
+    }
+
+    html[data-theme="dark"] .moon-icon {
+      display: none;
+    }
+
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin: 0 0 20px;
+    }
+
+    .summary-card {
+      min-height: 108px;
+      padding: 16px;
+      border: 1px solid var(--cp-border);
+      border-radius: 16px;
+      background: var(--cp-surface);
+      box-shadow: 0 0 2px var(--cp-border), 0 1px 2px var(--cp-border);
+    }
+
+    .summary-card strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--cp-accent);
+      font-size: 1.05rem;
+    }
+
+    .summary-card p {
+      margin: 0;
+      color: var(--cp-text-soft);
+      font-size: 0.92rem;
+    }
+
+    .table-shell {
+      overflow-x: auto;
+      border: 1px solid var(--cp-border);
+      border-radius: 0.625rem;
+      background: var(--cp-surface);
+      box-shadow: 0 0 2px var(--cp-border), 0 1px 2px var(--cp-border);
+    }
+
+    table {
+      width: 100%;
+      min-width: 1450px;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+
+    col.role { width: 11%; }
+    col.agents { width: 7%; }
+    col.looks { width: 20%; }
+    col.bottleneck { width: 18%; }
+    col.products { width: 25%; }
+    col.guardrails { width: 19%; }
+
+    th,
+    td {
+      padding: 16px;
+      border-right: 1px solid var(--cp-border);
+      border-bottom: 1px solid var(--cp-border);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th:last-child,
+    td:last-child {
+      border-right: 0;
+    }
+
+    thead th {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      background: var(--cp-accent);
+      color: var(--cp-accent-fg);
+      font-weight: 700;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: 0;
+    }
+
+    td {
+      background: var(--cp-surface);
+    }
+
+    .stage-title {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 1.05rem;
+    }
+
+    .role-label {
+      display: block;
+      color: var(--cp-text-muted);
+      font-style: italic;
+    }
+
+    .agent-count {
+      font-size: 1.05rem;
+      font-weight: 700;
+    }
+
+    .coverage {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 4px 8px;
+      border: 1px solid var(--cp-accent);
+      border-radius: 0.625rem;
+      background: var(--cp-accent-soft);
+      color: var(--cp-accent);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+
+    p {
+      margin: 0 0 12px;
+    }
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    li {
+      margin-bottom: 6px;
+    }
+
+    li:last-child {
+      margin-bottom: 0;
+    }
+
+    li::before {
+      content: "– ";
+      color: var(--cp-text-muted);
+    }
+
+    .unlock {
+      color: var(--cp-text-soft);
+    }
+
+    .unlock strong {
+      color: var(--cp-text);
+    }
+
+    .transition td {
+      padding: 13px 16px;
+      background: var(--cp-surface-soft);
+      color: var(--cp-text-soft);
+      font-size: 0.94rem;
+    }
+
+    .transition strong {
+      color: var(--cp-text);
+    }
+
+    .gap {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--cp-border);
+      color: var(--cp-text-soft);
+      font-size: 0.92rem;
+    }
+
+    .gap strong {
+      color: var(--cp-warning);
+    }
+
+    .footnotes {
+      margin-top: 20px;
+      padding: 18px;
+      border: 1px solid var(--cp-border);
+      border-radius: 16px;
+      background: var(--cp-surface);
+      color: var(--cp-text-soft);
+    }
+
+    .footnotes strong {
+      color: var(--cp-text);
+    }
+
+    @media (max-width: 900px) {
+      .page {
+        width: min(100% - 24px, 1580px);
+        padding-top: 28px;
+      }
+
+      .masthead {
+        flex-direction: column;
+      }
+
+      .summary {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 520px) {
+      .summary {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media print {
+      .theme-button {
+        display: none;
+      }
+
+      .page {
+        width: 100%;
+        padding: 0;
+      }
+
+      .table-shell {
+        overflow: visible;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="masthead">
+      <div>
+        <h1>Steps of AI Adoption</h1>
+        <p class="subtitle">A Microsoft and GitHub capability map for moving from controlled access to intent-driven enterprise automation.</p>
+        <p class="disclaimer"><strong>Independent assessment solution:</strong> this is not an official Microsoft, GitHub or joint recommendation. It is a proposed maturity framework for enterprise discussion. Capabilities, availability and licensing reflect the assessment date and must be validated against current product documentation.</p>
+        <div class="meta">
+          <span class="chip">Microsoft + GitHub platform</span>
+          <span class="chip">Assessment: Aug 7, 2026</span>
+          <span class="chip">Independent assessment</span>
+        </div>
+      </div>
+      <button class="theme-button" id="theme-toggle" type="button" aria-label="Switch to dark mode" title="Switch to dark mode">
+        <svg class="theme-icon moon-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M20.2 15.3A8.5 8.5 0 0 1 8.7 3.8 8.5 8.5 0 1 0 20.2 15.3Z" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+        <svg class="theme-icon sun-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="12" cy="12" r="3.8" stroke-width="1.8"></circle>
+          <path d="M12 2.5V5M12 19v2.5M4.6 4.6l1.8 1.8M17.6 17.6l1.8 1.8M2.5 12H5M19 12h2.5M4.6 19.4l1.8-1.8M17.6 6.4l1.8-1.8" stroke-width="1.8" stroke-linecap="round"></path>
+        </svg>
+      </button>
+    </header>
+
+    <section class="summary" aria-label="Executive summary">
+      <article class="summary-card">
+        <strong>Stages 0–1</strong>
+        <p>Strong native coverage through Copilot governance, regional data controls, assisted development, reviews and GitHub security.</p>
+      </article>
+      <article class="summary-card">
+        <strong>Stage 2</strong>
+        <p>Credible for bounded fleets of coding agents, with repository, session-duration and review-capacity constraints.</p>
+      </article>
+      <article class="summary-card">
+        <strong>Stage 3</strong>
+        <p>Requires Microsoft Foundry, Agent Framework, Entra, Purview and Azure observability around GitHub.</p>
+      </article>
+      <article class="summary-card">
+        <strong>Stage 4</strong>
+        <p>Platform-enabling only. A 1,000-agent operating model remains a custom distributed system and organizational change.</p>
+      </article>
+    </section>
+
+    <div class="table-shell">
+      <table>
+        <colgroup>
+          <col class="role">
+          <col class="agents">
+          <col class="looks">
+          <col class="bottleneck">
+          <col class="products">
+          <col class="guardrails">
+        </colgroup>
+        <thead>
+          <tr>
+            <th>Step &amp; your role</th>
+            <th>Agents</th>
+            <th>What it looks like</th>
+            <th>What’s the bottleneck</th>
+            <th>Microsoft &amp; GitHub capabilities</th>
+            <th>Guardrails &amp; gaps</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <strong class="stage-title">0: Controlled access</strong>
+              <span class="role-label">Governance gatekeeper</span>
+              <span class="coverage">Strong coverage</span>
+            </td>
+            <td><span class="agent-count">0</span></td>
+            <td>
+              <p>AI access is limited to approved users, models, repositories and use cases. Security, legal and procurement approvals dominate adoption.</p>
+              <p>Teams may experiment locally, but there is no trusted path for hosting, reviewing or operating agent-created artifacts.</p>
+            </td>
+            <td>
+              <p>Legacy approval processes, unclear data boundaries, licensing decisions and a focus on token cost rather than engineering outcomes.</p>
+            </td>
+            <td>
+              <ul>
+                <li>GitHub Copilot Business and Enterprise policies</li>
+                <li>Seat, feature, model and MCP controls</li>
+                <li>Repository permissions and content exclusion</li>
+                <li>GitHub AI-credit budgets and audit logs</li>
+                <li><a href="https://github.blog/changelog/2026-04-13-copilot-data-residency-in-us-eu-and-fedramp-compliance-now-available/" target="_blank" rel="noreferrer">Copilot data residency for US and EU regions</a></li>
+                <li>Microsoft Entra ID and Conditional Access</li>
+                <li>Microsoft Purview, Azure Policy and Defender</li>
+                <li>Azure regional deployment, Private Link, VNet and encryption controls</li>
+              </ul>
+            </td>
+            <td>
+              <ul>
+                <li>Least-privilege repository access</li>
+                <li>Approved models and tools</li>
+                <li>Approved geographies and Azure Policy allowed-location rules</li>
+                <li>Enable the policy that restricts Copilot to data-residency-compliant models</li>
+                <li>Budget limits and audit streaming</li>
+                <li>Protected branches and Actions allowlists</li>
+              </ul>
+              <p class="gap"><strong>Scope:</strong> GitHub documents in-region inference and associated data for generally available Copilot features when the separate residency policy is enabled. US and EU/EFTA are currently supported. Preview features, connected MCP services and unavailable regional models require separate review. Local prompts are also not fully visible in normal GitHub audit logs.</p>
+            </td>
+          </tr>
+
+          <tr class="transition">
+            <td colspan="6"><strong>How to get from step 0 to 1:</strong> approve use cases, models and deployment geographies; document data flows and retention; establish least-privilege access; select pilot repositories; set cost limits and define human-review requirements.</td>
+          </tr>
+
+          <tr>
+            <td>
+              <strong class="stage-title">1: AI-assisted development</strong>
+              <span class="role-label">You + an agent</span>
+              <span class="coverage">Native</span>
+            </td>
+            <td><span class="agent-count">~1</span></td>
+            <td>
+              <p>One engineer works with one agent in the IDE, terminal or GitHub. Most changes are supervised and reviewed before merge.</p>
+              <p class="unlock"><strong>Unlock:</strong> work that once filled an afternoon can be completed between meetings.</p>
+            </td>
+            <td>
+              <p>Human attention. Engineers inspect prompts, edits, tests and security findings because trust in self-verification is still limited.</p>
+              <p>Work remains mostly synchronous.</p>
+            </td>
+            <td>
+              <ul>
+                <li><a href="https://docs.github.com/en/copilot" target="_blank" rel="noreferrer">GitHub Copilot Chat and IDE agent mode</a></li>
+                <li>GitHub Copilot CLI</li>
+                <li>Copilot Spaces and custom instructions</li>
+                <li><a href="https://docs.github.com/en/copilot/concepts/agents/code-review" target="_blank" rel="noreferrer">Copilot code review</a></li>
+                <li>CodeQL, secret scanning and Copilot Autofix</li>
+                <li><a href="https://github.blog/changelog/2026-02-27-copilot-metrics-is-now-generally-available/" target="_blank" rel="noreferrer">Copilot usage metrics dashboard, REST API and NDJSON reports — GA</a></li>
+                <li><a href="https://github.blog/changelog/2026-07-01-copilot-cli-auto-model-selection-routes-based-on-task/" target="_blank" rel="noreferrer">Auto model selection and task-aware routing</a></li>
+                <li>GitHub Copilot app sessions and canvases</li>
+              </ul>
+            </td>
+            <td>
+              <ul>
+                <li>Human PR approval and protected branches</li>
+                <li>Required tests, builds and code scanning</li>
+                <li>Custom instructions and scoped tools</li>
+                <li>Usage and cost monitoring</li>
+              </ul>
+              <p class="gap"><strong>Gap:</strong> AI review cannot guarantee correctness or find every security issue. Spaces provide context, not orchestration.</p>
+            </td>
+          </tr>
+
+          <tr class="transition">
+            <td colspan="6"><strong>How to get from step 1 to 2:</strong> encode standards in Copilot instructions and skills, add trusted test/build/security loops, use automatic review, and divide independent work into branch- and PR-sized tasks.</td>
+          </tr>
+
+          <tr>
+            <td>
+              <strong class="stage-title">2: Parallel agent delivery</strong>
+              <span class="role-label">Orchestrator</span>
+              <span class="coverage">Bounded coverage</span>
+            </td>
+            <td><span class="agent-count">~10</span></td>
+            <td>
+              <p>An engineer coordinates several coding tasks at once. Agents work on separate branches and PRs, validate their work, and return reviewable diffs.</p>
+              <p class="unlock"><strong>Unlock:</strong> a maintenance backlog that took weeks becomes an afternoon of orchestration.</p>
+            </td>
+            <td>
+              <p>Review overload, overlapping edits, merge conflicts, task decomposition, context quality and AI-credit or Actions consumption.</p>
+            </td>
+            <td>
+              <ul>
+                <li><a href="https://docs.github.com/en/copilot/concepts/agents/cloud-agent/about-cloud-agent" target="_blank" rel="noreferrer">Multiple Copilot cloud-agent sessions</a></li>
+                <li><a href="https://docs.github.com/en/copilot/concepts/agents/copilot-cli/fleet" target="_blank" rel="noreferrer">Copilot CLI /fleet and subagents</a></li>
+                <li>Custom agents and agent skills</li>
+                <li>GitHub Issues, Projects and Actions</li>
+                <li>Copilot automations and scheduled workflows</li>
+                <li>Azure Boards to Copilot cloud-agent integration</li>
+                <li><a href="https://github.blog/changelog/2026-05-18-remote-control-for-copilot-cli-sessions-now-generally-available-on-mobile-web-and-vs-code/" target="_blank" rel="noreferrer">Remote CLI steering on GitHub.com, GitHub Mobile, VS Code and JetBrains — GA</a></li>
+                <li><a href="https://github.blog/changelog/2026-06-02-cloud-and-local-sandboxes-for-github-copilot-now-in-public-preview/" target="_blank" rel="noreferrer">Cloud and local Copilot sandboxes — public preview</a></li>
+              </ul>
+            </td>
+            <td>
+              <ul>
+                <li>One task per branch and pull request</li>
+                <li>Required reviewers and status checks</li>
+                <li>Tool allowlists, hooks and firewall controls</li>
+                <li>Per-user budgets and security review</li>
+              </ul>
+              <p class="gap"><strong>Gap:</strong> there is no published Copilot-agent concurrency SLA. Cloud-agent sessions are limited to one repository, one branch, one PR and 59 minutes.</p>
+            </td>
+          </tr>
+
+          <tr class="transition">
+            <td colspan="6"><strong>How to get from step 2 to 3:</strong> introduce ownership and dependency graphs, durable queues, per-agent telemetry, structured review sampling and exception routing; move cross-repository orchestration into Microsoft Foundry or custom services.</td>
+          </tr>
+
+          <tr>
+            <td>
+              <strong class="stage-title">3: Governed autonomous operations</strong>
+              <span class="role-label">Manager of managers</span>
+              <span class="coverage">Integration-based</span>
+            </td>
+            <td><span class="agent-count">~100</span></td>
+            <td>
+              <p>Agent supervisors select specialized workers, route tasks and operate continuously. Humans review exceptions, outcomes and policy decisions rather than every edit.</p>
+              <p class="unlock"><strong>Unlock:</strong> maintenance, cleanup and remediation become continuous background operations.</p>
+            </td>
+            <td>
+              <p>Trust, evaluation quality, identity lifecycle, rate limits, distributed state, downstream capacity, exception handling and cost.</p>
+            </td>
+            <td>
+              <ul>
+                <li><a href="https://learn.microsoft.com/en-us/azure/foundry/agents/overview" target="_blank" rel="noreferrer">Microsoft Foundry Agent Service</a></li>
+                <li><a href="https://learn.microsoft.com/en-us/agent-framework/workflows/orchestrations/" target="_blank" rel="noreferrer">Microsoft Agent Framework orchestration</a></li>
+                <li>GitHub Copilot SDK and cloud sessions</li>
+                <li>Entra Agent ID and agent identities</li>
+                <li><a href="https://github.blog/changelog/2026-07-08-enterprise-managed-opentelemetry-export-for-vs-code-and-cli/" target="_blank" rel="noreferrer">Enterprise-managed OpenTelemetry export for VS Code and Copilot CLI</a></li>
+                <li>Application Insights and Foundry agent tracing</li>
+                <li>Purview, Defender and GitHub security controls</li>
+              </ul>
+            </td>
+            <td>
+              <ul>
+                <li>Per-agent identities and RBAC</li>
+                <li>Human approval for sensitive tools</li>
+                <li>Regional deployment, VNet isolation, DLP and audit</li>
+                <li>Evaluation, traces, alerts and cost telemetry</li>
+              </ul>
+              <p class="gap"><strong>Gap:</strong> GitHub alone is insufficient. Durable orchestration, dependency handling, rollback and recovery require Microsoft services and custom engineering.</p>
+            </td>
+          </tr>
+
+          <tr class="transition">
+            <td colspan="6"><strong>How to get from step 3 to 4:</strong> build a governed agent registry, hierarchical supervisors, durable state, continuous evaluation, circuit breakers, quota management, cost-aware model routing and explicit human authority for irreversible actions.</td>
+          </tr>
+
+          <tr>
+            <td>
+              <strong class="stage-title">4: Intent-driven enterprise automation</strong>
+              <span class="role-label">Executive steering by intent</span>
+              <span class="coverage">Custom architecture</span>
+            </td>
+            <td><span class="agent-count">1,000+</span></td>
+            <td>
+              <p>Large agent fleets are initiated by goals and events. Leaders set intent, policy and financial boundaries, then monitor outcomes and exceptions.</p>
+              <p class="unlock"><strong>Unlock:</strong> quarter-long migrations and enterprise remediation programs become repeatable workflows.</p>
+            </td>
+            <td>
+              <p>Goal decomposition, systemic error propagation, quality drift, identity sprawl, economics, accountability and organizational redesign.</p>
+            </td>
+            <td>
+              <ul>
+                <li>Custom agent fabric on Microsoft Foundry</li>
+                <li>Agent Framework supervisors and workflows</li>
+                <li>Azure queues, compute, storage and model routing</li>
+                <li>Entra, Purview, Monitor and Cost Management</li>
+                <li>GitHub as the code, PR and security system of record</li>
+                <li>M365 and Teams as human interaction channels</li>
+              </ul>
+            </td>
+            <td>
+              <ul>
+                <li>Hierarchical least privilege</li>
+                <li>Financial limits and anomaly detection</li>
+                <li>Formal SLOs and blast-radius controls</li>
+                <li>Independent assurance and staged autonomy</li>
+              </ul>
+              <p class="gap"><strong>Gap:</strong> neither Microsoft nor GitHub offers a turnkey or capacity-guaranteed 1,000-agent system. This must be treated as a bespoke distributed system.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <aside class="footnotes">
+      <p><strong>Assessment boundary:</strong> GitHub can provide the software-work execution and assurance plane through repositories, branches, pull requests, Actions, review and security. Microsoft provides the broader orchestration, identity, governance, observability and cost-control plane required at higher maturity.</p>
+      <p><strong>Data residency:</strong> GitHub documents Copilot data residency for US and EU/EFTA regions when administrators explicitly restrict Copilot to compliant models. Combine this with Azure regional deployments, allowed-location policies, private networking, encryption, Purview classification and documented retention. Preview features and external MCP services remain separate data-flow decisions.</p>
+      <p><strong>Evidence policy:</strong> capability and maturity labels are based on GitHub Docs and the <a href="https://github.blog/changelog/" target="_blank" rel="noreferrer">GitHub Changelog</a>. Generally available, preview and roadmap items are kept distinct. GitHub Actions runner capacity is not treated as Copilot-agent concurrency.</p>
+    </aside>
+  </main>
+
+  <script>
+    const button = document.getElementById("theme-toggle");
+    const updateThemeButton = () => {
+      const current = document.documentElement.getAttribute("data-theme");
+      const next = current === "dark" ? "light" : "dark";
+      const label = `Switch to ${next} mode`;
+      button.setAttribute("aria-label", label);
+      button.setAttribute("title", label);
+    };
+
+    updateThemeButton();
+
+    button.addEventListener("click", () => {
+      const current = document.documentElement.getAttribute("data-theme");
+      document.documentElement.setAttribute("data-theme", current === "dark" ? "light" : "dark");
+      updateThemeButton();
+    });
+  </script>
+</body>
+</html>
