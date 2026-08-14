@@ -411,45 +411,88 @@
       accent-color: var(--cp-accent);
     }
 
-    .gaps-section {
-      margin: 0 0 24px;
+    .waf-section {
+      margin: 32px 0 24px;
     }
 
-    .gaps-grid {
+    .waf-legend {
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 12px;
+      margin-bottom: 14px;
     }
 
-    .gap-card {
-      padding: 16px;
+    .waf-card {
+      padding: 18px;
       border: 1px solid var(--cp-border);
       border-radius: 16px;
       background: var(--cp-surface);
       box-shadow: 0 0 2px var(--cp-border), 0 1px 2px var(--cp-border);
     }
 
-    .gap-number {
-      display: inline-grid;
-      width: 30px;
-      height: 30px;
+    .waf-card h3 {
+      margin: 0 0 4px;
+      font-size: 1.05rem;
+    }
+
+    .waf-card .source {
+      display: block;
       margin-bottom: 10px;
-      place-items: center;
-      border-radius: 50%;
+      color: var(--cp-text-muted);
+      font-size: 0.85rem;
+    }
+
+    .pillar {
+      display: grid;
+      grid-template-columns: 148px minmax(0, 1fr);
+      gap: 10px;
+      padding: 7px 0;
+      border-top: 1px solid var(--cp-border);
+      font-size: 0.87rem;
+    }
+
+    .pillar strong {
+      color: var(--cp-accent);
+    }
+
+    .pillar span {
+      color: var(--cp-text-soft);
+    }
+
+    .waf-note {
+      margin-bottom: 16px;
+      padding: 16px 18px;
+      border: 1px solid var(--cp-border);
+      border-radius: 12px;
+      background: var(--cp-surface);
+      color: var(--cp-text-soft);
+      font-size: 0.92rem;
+    }
+
+    .waf-note strong {
+      color: var(--cp-warning);
+    }
+
+    .pill-row {
+      margin-bottom: 10px;
+    }
+
+    .pill {
+      display: inline-block;
+      margin: 0 4px 5px 0;
+      padding: 3px 9px;
+      border: 1px solid var(--cp-border-strong);
+      border-radius: 999px;
+      color: var(--cp-text-muted);
+      font-size: 0.75rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .pill.lead {
+      border-color: var(--cp-accent);
       background: var(--cp-accent-soft);
       color: var(--cp-accent);
-      font-weight: 700;
-    }
-
-    .gap-card h3 {
-      margin: 0 0 6px;
-      font-size: 1rem;
-    }
-
-    .gap-card p {
-      margin: 0;
-      color: var(--cp-text-soft);
-      font-size: 0.88rem;
     }
 
     .table-shell {
@@ -473,6 +516,15 @@
     col.bottleneck { width: 18%; }
     col.products { width: 25%; }
     col.guardrails { width: 19%; }
+
+    .table-shell.mapping table {
+      min-width: 1180px;
+    }
+
+    col.waf-step { width: 14%; }
+    col.waf-gh { width: 29%; }
+    col.waf-az { width: 29%; }
+    col.waf-gap { width: 28%; }
 
     th,
     td {
@@ -625,8 +677,8 @@
         grid-template-columns: 1fr;
       }
 
-      .gaps-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+      .waf-legend {
+        grid-template-columns: 1fr;
       }
     }
 
@@ -635,12 +687,15 @@
         grid-template-columns: 1fr;
       }
 
-      .radials,
-      .gaps-grid {
+      .radials {
         grid-template-columns: 1fr;
       }
-    }
 
+      .pillar {
+        grid-template-columns: 1fr;
+        gap: 2px;
+      }
+    }
     @media print {
       .theme-button {
         display: none;
@@ -744,58 +799,6 @@
             <strong id="maturity-label">Calculating…</strong>
             <p id="maturity-guidance"></p>
           </div>
-        </article>
-      </div>
-    </section>
-
-    <section class="gaps-section" aria-labelledby="gaps-title">
-      <div class="section-heading">
-        <div>
-          <h2 id="gaps-title">Missing capabilities to close</h2>
-          <p>These are the principal gaps between having capable products and operating a repeatable, evidence-driven enterprise AI governance system.</p>
-        </div>
-      </div>
-
-      <div class="gaps-grid">
-        <article class="gap-card">
-          <span class="gap-number">1</span>
-          <h3>Unified AI application registry</h3>
-          <p>No single Microsoft/GitHub inventory automatically combines approved models, Copilot surfaces, custom agents, MCP servers, owners, data classifications and business use cases.</p>
-        </article>
-        <article class="gap-card">
-          <span class="gap-number">2</span>
-          <h3>Evidence collection and scoring</h3>
-          <p>GitHub metrics, audit logs, Purview, Defender, Foundry evaluations and Azure configuration evidence must be normalized into a shared score and backed by source links.</p>
-        </article>
-        <article class="gap-card">
-          <span class="gap-number">3</span>
-          <h3>Shadow AI discovery</h3>
-          <p>Copilot governance does not discover every external AI application used by employees. Network, endpoint, identity and procurement signals are still needed.</p>
-        </article>
-        <article class="gap-card">
-          <span class="gap-number">4</span>
-          <h3>Continuous recertification</h3>
-          <p>Model, policy, residency, feature maturity and vendor terms change. Enterprises need expiry dates, material-change detection and automatic reassessment.</p>
-        </article>
-        <article class="gap-card">
-          <span class="gap-number">5</span>
-          <h3>Score-to-policy enforcement</h3>
-          <p>There is no turnkey control that converts a confidence score into GitHub rulesets, Entra access decisions, Purview DLP, Azure Policy or MCP restrictions.</p>
-        </article>
-        <article class="gap-card">
-          <span class="gap-number">6</span>
-          <h3>Independent human assurance</h3>
-          <p>Automated evidence extraction can be wrong. High-risk systems require accountable reviewers, recorded exceptions and separation between builders and approvers.</p>
-        </article>
-        <article class="gap-card">
-          <span class="gap-number">7</span>
-          <h3>Cross-agent incident response</h3>
-          <p>Enterprises need a common kill switch, containment process, forensic trail and recovery workflow spanning GitHub, Azure agents, models and connected tools.</p>
-        </article>
-        <article class="gap-card">
-          <span class="gap-number">8</span>
-          <h3>Outcome and risk linkage</h3>
-          <p>Usage analytics measure adoption, not business benefit or residual risk. Scorecards must connect activity to quality, security, productivity and customer outcomes.</p>
         </article>
       </div>
     </section>
@@ -1024,6 +1027,225 @@
         </tbody>
       </table>
     </div>
+
+    <section class="waf-section" aria-labelledby="waf-title">
+      <div class="section-heading">
+        <div>
+          <h2 id="waf-title">Mapping to the Well-Architected frameworks</h2>
+          <p>How each step aligns to the <a href="https://learn.github.com/well-architected/" target="_blank" rel="noreferrer">GitHub Well-Architected Framework</a> and the <a href="https://learn.microsoft.com/en-us/azure/well-architected/pillars" target="_blank" rel="noreferrer">Azure Well-Architected Framework</a>, and where the frameworks stop.</p>
+        </div>
+        <span class="chip">5 + 5 pillars</span>
+      </div>
+
+      <div class="waf-legend">
+        <article class="waf-card">
+          <h3>GitHub Well-Architected</h3>
+          <span class="source">Community-driven guidance for adopting and deploying GitHub effectively. GitHub Docs remains the source of truth for implementation detail.</span>
+          <div class="pillar"><strong>Productivity</strong><span>Streamline workflows, automate processes, accelerate team velocity.</span></div>
+          <div class="pillar"><strong>Collaboration</strong><span>Inclusive practices and transparent project management for open knowledge sharing.</span></div>
+          <div class="pillar"><strong>Application Security</strong><span>Embed security into every stage of development, from code scanning to compliance.</span></div>
+          <div class="pillar"><strong>Governance</strong><span>Policies and controls that balance innovation with oversight, access management and accountability at scale.</span></div>
+          <div class="pillar"><strong>Architecture</strong><span>Scalable, resilient and efficient GitHub environments, including enterprise-level solutions.</span></div>
+        </article>
+
+        <article class="waf-card">
+          <h3>Azure Well-Architected</h3>
+          <span class="source">Workload-level architectural excellence, extended by a dedicated <a href="https://learn.microsoft.com/en-us/azure/well-architected/ai/get-started" target="_blank" rel="noreferrer">AI workload</a> guidance set of ten design areas.</span>
+          <div class="pillar"><strong>Reliability</strong><span>Resiliency, availability, recovery. Failure-mode analysis and known design patterns.</span></div>
+          <div class="pillar"><strong>Security</strong><span>Data protection, threat detection and mitigation. Confidentiality, integrity, availability.</span></div>
+          <div class="pillar"><strong>Cost Optimization</strong><span>Cost modelling, budgets, reduce waste. Usage and rate utilization.</span></div>
+          <div class="pillar"><strong>Operational Excellence</strong><span>Holistic observability, DevOps practices, safe deployment.</span></div>
+          <div class="pillar"><strong>Performance Efficiency</strong><span>Scalability and load testing. Scale horizontally, test early and often.</span></div>
+        </article>
+      </div>
+
+      <p class="waf-note"><strong>The critical mismatch:</strong> neither framework defines a maturity model, adoption stages or crawl/walk/run levels. GitHub Well-Architected ships a checklist per pillar; Azure ships the Well-Architected Review assessment tool. Both are point-in-time posture assessments of a system that already exists. Neither answers <em>“how many agents can we safely run next quarter, and what must be true first.”</em> The steps above supply the progression axis the pillars deliberately leave out — and the pillars supply the control depth the steps do not.</p>
+
+      <div class="table-shell mapping">
+        <table>
+          <colgroup>
+            <col class="waf-step">
+            <col class="waf-gh">
+            <col class="waf-az">
+            <col class="waf-gap">
+          </colgroup>
+          <thead>
+            <tr>
+              <th>Step</th>
+              <th>GitHub Well-Architected emphasis</th>
+              <th>Azure Well-Architected emphasis</th>
+              <th>What neither framework covers</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <strong class="stage-title">0: Controlled access</strong>
+                <span class="role-label">Governance gatekeeper</span>
+              </td>
+              <td>
+                <div class="pill-row"><span class="pill lead">Governance</span><span class="pill">Application Security</span></div>
+                <ul>
+                  <li>Essentials of governance and administration with GitHub Enterprise</li>
+                  <li>GitHub Enterprise Policies &amp; Best Practices</li>
+                  <li>Managing repositories at scale — custom properties and rulesets</li>
+                  <li><a href="https://learn.github.com/well-architected/library/governance/recommendations/managing-ai-credits/" target="_blank" rel="noreferrer">Managing AI credits</a> — set layered budgets before, not after, rollout</li>
+                  <li>Enforce GitHub Advanced Security at scale; repositories threat model</li>
+                </ul>
+              </td>
+              <td>
+                <div class="pill-row"><span class="pill lead">Security</span><span class="pill lead">Cost Optimization</span></div>
+                <ul>
+                  <li>Protect data at rest, in transit and in use per sensitivity</li>
+                  <li>Robust access management for user and system identities</li>
+                  <li>Cost modelling and budgets established ahead of consumption</li>
+                  <li>AI design areas: Responsible AI, grounding and training data design</li>
+                </ul>
+              </td>
+              <td>
+                <p><strong>Unified AI application registry.</strong> No inventory automatically combines approved models, Copilot surfaces, custom agents, MCP servers, owners, data classifications and business use cases.</p>
+                <p class="gap"><strong>Shadow AI:</strong> both frameworks assume the estate is known. Neither discovers unsanctioned external AI use — that needs network, endpoint, identity and procurement signals.</p>
+              </td>
+            </tr>
+
+            <tr class="transition">
+              <td colspan="4"><strong>Pillar shift 0 to 1:</strong> the centre of gravity moves from Governance to Productivity. In Azure terms, the Security and Cost Optimization gates open so that Operational Excellence work can begin.</td>
+            </tr>
+
+            <tr>
+              <td>
+                <strong class="stage-title">1: AI-assisted development</strong>
+                <span class="role-label">You + an agent</span>
+              </td>
+              <td>
+                <div class="pill-row"><span class="pill lead">Productivity</span><span class="pill">Collaboration</span><span class="pill">Application Security</span></div>
+                <ul>
+                  <li><a href="https://learn.github.com/well-architected/library/productivity/recommendations/adopting-copilot-at-scale/" target="_blank" rel="noreferrer">Adopting GitHub Copilot at scale</a> — executive sponsorship, champions, week-by-week rollout</li>
+                  <li>Engineering system metrics — establish the pre-agent baseline</li>
+                  <li>Champion program; applying DevOps methodology</li>
+                  <li>Securing developer workspace; prioritizing security alert remediation</li>
+                </ul>
+              </td>
+              <td>
+                <div class="pill-row"><span class="pill lead">Operational Excellence</span><span class="pill">Security</span></div>
+                <ul>
+                  <li>Standards, comprehensive monitoring and safe deployment practices</li>
+                  <li>Security testing extended to cover AI-introduced change</li>
+                  <li>AI design areas: testing and evaluation, workload personas, Responsible AI</li>
+                </ul>
+              </td>
+              <td>
+                <p><strong>Evidence collection and scoring.</strong> Copilot metrics measure activity, not confidence. Nothing normalizes GitHub metrics, audit logs, Purview, Defender and Azure configuration into one score with source links.</p>
+                <p class="gap"><strong>Assurance:</strong> checklists are self-assessed. Neither framework requires accountable reviewers, recorded exceptions, or separation between builders and approvers.</p>
+              </td>
+            </tr>
+
+            <tr class="transition">
+              <td colspan="4"><strong>Pillar shift 1 to 2:</strong> Application Security and Architecture become load-bearing as agents produce parallel branch-level change. Performance Efficiency enters the Azure picture for the first time — concurrency is now a design constraint.</td>
+            </tr>
+
+            <tr>
+              <td>
+                <strong class="stage-title">2: Parallel agent delivery</strong>
+                <span class="role-label">Orchestrator</span>
+              </td>
+              <td>
+                <div class="pill-row"><span class="pill lead">Application Security</span><span class="pill lead">Governance</span><span class="pill">Architecture</span></div>
+                <ul>
+                  <li><a href="https://learn.github.com/well-architected/library/governance/recommendations/governing-agents/" target="_blank" rel="noreferrer">Governing agents in GitHub Enterprise</a> — the closest direct match to this step</li>
+                  <li>Enforce human review gates on agent output via CODEOWNERS and branch rulesets</li>
+                  <li>Securing GitHub Actions workflows; scaling Actions reusability</li>
+                  <li>Deploying Actions Runner Controller; private networking for runners</li>
+                </ul>
+                <p class="gap"><strong>Named anti-pattern:</strong> exempting agent-created changes from existing checks or rulesets. Agent pull requests should pass the same gates as human ones.</p>
+              </td>
+              <td>
+                <div class="pill-row"><span class="pill lead">Performance Efficiency</span><span class="pill lead">Cost Optimization</span><span class="pill">Reliability</span></div>
+                <ul>
+                  <li>Scale horizontally; load test early and often</li>
+                  <li>Retry, circuit breaker and bulkhead patterns for throttled model calls</li>
+                  <li>Reduce waste as AI credit and Actions consumption becomes material</li>
+                  <li>AI design areas: application design, MLOps and GenAIOps, testing and evaluation</li>
+                </ul>
+              </td>
+              <td>
+                <p><strong>Review capacity as a first-class resource.</strong> This is the binding constraint at step 2, and neither framework prescribes structured review sampling, reviewer-capacity budgeting or exception routing.</p>
+                <p class="gap"><strong>Score-to-policy:</strong> no turnkey control converts an assessment result into GitHub rulesets, Entra access decisions, Purview DLP, Azure Policy or MCP restrictions. The loop stays manual.</p>
+              </td>
+            </tr>
+
+            <tr class="transition">
+              <td colspan="4"><strong>Pillar shift 2 to 3:</strong> Governance returns as the dominant GitHub pillar, but now for non-human identity. On the Azure side, Reliability and Operational Excellence take over as the fleet becomes a distributed system in its own right.</td>
+            </tr>
+
+            <tr>
+              <td>
+                <strong class="stage-title">3: Governed autonomous operations</strong>
+                <span class="role-label">Manager of managers</span>
+              </td>
+              <td>
+                <div class="pill-row"><span class="pill lead">Governance</span><span class="pill">Architecture</span><span class="pill">Productivity</span></div>
+                <ul>
+                  <li><a href="https://learn.github.com/well-architected/library/governance/recommendations/agentic-governance-taxonomy/" target="_blank" rel="noreferrer">Agentic governance taxonomy</a> — identity and access context, action boundaries, automated assurance, audit and provenance</li>
+                  <li><a href="https://learn.github.com/well-architected/library/governance/recommendations/agentic-engineering-system-on-github/" target="_blank" rel="noreferrer">Building an agentic engineering system on GitHub</a></li>
+                  <li>Shared knowledge for agentic engineering; governing agentic workflows</li>
+                  <li><a href="https://learn.github.com/well-architected/library/architecture/recommendations/expanding-enterprise-custom-agents-context/" target="_blank" rel="noreferrer">Expanding the context of enterprise custom agents</a></li>
+                  <li>Minimize the enterprise baseline; let organizations adapt within it</li>
+                </ul>
+              </td>
+              <td>
+                <div class="pill-row"><span class="pill lead">Reliability</span><span class="pill lead">Operational Excellence</span><span class="pill">Cost Optimization</span></div>
+                <ul>
+                  <li>Mitigate single points of failure; conduct failure mode analysis</li>
+                  <li>Balance reliability objectives across dependent components</li>
+                  <li>Holistic observability across agents, models and tools</li>
+                  <li>AI design areas: workload operations, MLOps and GenAIOps, application platform</li>
+                </ul>
+              </td>
+              <td>
+                <p><strong>Continuous recertification.</strong> Models, policies, residency, feature maturity and vendor terms change. Neither framework defines expiry dates, material-change detection or automatic reassessment.</p>
+                <p class="gap"><strong>Cross-agent incident response:</strong> no common kill switch, containment process, forensic trail or recovery workflow spanning GitHub, Azure agents, models and connected tools.</p>
+              </td>
+            </tr>
+
+            <tr class="transition">
+              <td colspan="4"><strong>Pillar shift 3 to 4:</strong> all ten pillars apply at once. GitHub Well-Architected reaches its stated boundary — it governs how teams use GitHub, not how you operate a bespoke agent fabric. Azure Well-Architected becomes the authoritative lens because the fleet is now itself a workload.</td>
+            </tr>
+
+            <tr>
+              <td>
+                <strong class="stage-title">4: Intent-driven automation</strong>
+                <span class="role-label">Steering by intent</span>
+              </td>
+              <td>
+                <div class="pill-row"><span class="pill">Governance</span><span class="pill">Architecture</span><span class="pill">Collaboration</span></div>
+                <ul>
+                  <li>Enterprise baseline policy with delegated organization autonomy</li>
+                  <li>Repository architecture strategy, polyrepo and scaling Git repositories</li>
+                  <li>GitHub remains the code, pull request and security system of record</li>
+                </ul>
+                <p class="gap"><strong>Boundary:</strong> the framework is scoped to platform adoption. It does not describe operating a fleet of a thousand agents.</p>
+              </td>
+              <td>
+                <div class="pill-row"><span class="pill lead">All five pillars</span></div>
+                <ul>
+                  <li>The agent fabric is a workload — apply the full AI design-area set</li>
+                  <li>Application design, application platform and data platform</li>
+                  <li>Grounding data design; MLOps and GenAIOps; workload operations</li>
+                  <li>Testing and evaluation; workload personas; Responsible AI</li>
+                </ul>
+              </td>
+              <td>
+                <p><strong>Outcome and risk linkage.</strong> Both frameworks assess architectural quality, not business benefit or residual risk. Scorecards must connect activity to quality, security, productivity and customer outcomes.</p>
+                <p class="gap"><strong>Capacity:</strong> neither Microsoft nor GitHub offers a turnkey or capacity-guaranteed thousand-agent system. Treat it as a bespoke distributed system.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="footnotes"><strong>On using the two together.</strong> GitHub Well-Architected states the division itself: Azure and AWS “focus on cloud adoption with design areas specific to cloud infrastructure platform and services,” while GitHub “emphasizes developer experience and platform adoption with design principles focused on how teams use GitHub effectively.” Steps 0 to 2 are therefore governed almost entirely by GitHub Well-Architected. Steps 3 and 4 cannot be, because the orchestration layer stops being a GitHub configuration problem and becomes an Azure workload. Read the pillars as depth and the steps as sequence: a high pillar score does not authorize the next step, and reaching the next step does not excuse a failed pillar.</p>
+    </section>
 
   </main>
 
