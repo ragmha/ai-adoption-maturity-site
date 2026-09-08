@@ -317,13 +317,13 @@
 
   <div class="sheet">
     <header>
-      <p class="provenance">Independent assessment — not an official Microsoft, GitHub or joint recommendation · 14 August 2026</p>
+      <p class="provenance">Independent mapping — not an official Microsoft, GitHub or joint recommendation · Updated 8 September 2026</p>
       <h1>Steps of AI Adoption, mapped to the GitHub and Azure Well-Architected frameworks</h1>
-      <p class="standfirst">Five steps ordered by how much judgement has been delegated, after Boris Cherny. For each, the Microsoft and GitHub capabilities that support it, the Well-Architected pillars that dominate, and the residue neither framework covers.</p>
+      <p class="standfirst">Five steps of increasing delegation, adapted from the supplied Boris Cherny “Steps of AI Adoption” excerpt. The framework mapping and transition guidance are our interpretation, not an official equivalence or certification.</p>
     </header>
 
     <figure>
-      <figcaption><span class="label">Table I.</span> Steps of AI adoption against both frameworks. Pillars in bold are dominant at that step; transition rows state what must be true to advance.</figcaption>
+      <figcaption><span class="label">Table I.</span> Agent counts are illustrative, not thresholds or guarantees. Bold pillars show suggested emphasis; all applicable pillars remain relevant at every step.</figcaption>
       <div class="scroll">
         <table>
           <colgroup>
@@ -339,7 +339,7 @@
               <th scope="col">What it looks like</th>
               <th scope="col">GitHub Well-Architected</th>
               <th scope="col">Azure Well-Architected</th>
-              <th scope="col">What neither covers</th>
+              <th scope="col">Implementation considerations</th>
             </tr>
           </thead>
           <tbody>
@@ -350,7 +350,7 @@
               </th>
               <td>
                 <p class="gloss">Just dipping your toes in.</p>
-                <p>Access limited to approved users, models and repositories; security, legal and procurement approvals dominate. No trusted path for hosting or operating agent-created artefacts.</p>
+                <p>Access is gated and there is no agreed path to host or operate agent-created work. <em>Bottleneck:</em> approval delays and unclear ownership.</p>
               </td>
               <td>
                 <span class="pillars"><b>Governance</b><span> · Application Security</span></span>
@@ -369,13 +369,13 @@
                 </ul>
               </td>
               <td>
-                <p><strong>A unified AI registry.</strong> Nothing combines approved models, agents, MCP servers, owners and data classifications in one inventory.</p>
-                <p class="caveat"><strong>Shadow AI:</strong> both frameworks assume the estate is already known.</p>
+                <p><strong>Inventory and ownership.</strong> Record approved models, agents, MCP servers, owners and data classifications using existing inventory controls.</p>
+                <p class="caveat"><strong>Discovery:</strong> combine identity, endpoint and procurement signals to identify unapproved use.</p>
               </td>
             </tr>
 
             <tr class="transition">
-              <td colspan="5"><strong>0 → 1:</strong> approve use cases, models and geographies; document data flows and retention; least-privilege access; pilot repositories; cost limits and human-review requirements.</td>
+              <td colspan="5"><strong>0 → 1:</strong> align executive sponsors and security owners; unblock approved pilots with clear data boundaries, least-privilege access, deployment paths, budgets and human-review requirements.</td>
             </tr>
 
             <tr>
@@ -386,13 +386,13 @@
               </th>
               <td>
                 <p class="gloss">Augmenting the work you are already doing, without significantly adapting your processes or delegating any work to agents.</p>
-                <p>One engineer, one agent, supervised. You review almost every change before it merges. <em>Bottleneck:</em> your attention — you never look away.</p>
+                <p>One engineer, one agent, mostly supervised. You review almost every change before merge. <em>Bottleneck:</em> your attention.</p>
               </td>
               <td>
-                <span class="pillars"><b>Productivity</b><span> · Collaboration · App Security</span></span>
+                <span class="pillars"><b>Productivity</b><span> · Collaboration · Application Security</span></span>
                 <ul>
                   <li><a href="https://learn.github.com/well-architected/library/productivity/recommendations/adopting-copilot-at-scale/">Adopting Copilot at scale</a> — sponsorship and champions</li>
-                  <li>Engineering system metrics — set the pre-agent baseline</li>
+                  <li><a href="https://learn.github.com/well-architected/library/productivity/recommendations/engineering-system-metrics/">Engineering system metrics</a> — baseline delivery and business outcomes</li>
                   <li>Securing the developer workspace</li>
                 </ul>
               </td>
@@ -405,13 +405,13 @@
                 </ul>
               </td>
               <td>
-                <p><strong>Evidence and scoring.</strong> Copilot metrics measure activity, not confidence. Nothing normalises metrics, audit logs, Purview and Defender into one score.</p>
-                <p class="caveat"><strong>Assurance:</strong> checklists are self-assessed — no separation of builders and approvers.</p>
+                <p><strong>Evidence.</strong> Combine usage metrics with quality, delivery, cost and incident evidence. Usage alone does not establish readiness.</p>
+                <p class="caveat"><strong>Assurance:</strong> configure independent review for changes and name an accountable owner for assessment sign-off.</p>
               </td>
             </tr>
 
             <tr class="transition">
-              <td colspan="5"><strong>1 → 2:</strong> run more than one agent at once; build a self-verification loop you trust (tests, build, lint, end-to-end); encode standards in instructions and skills; automate code review.</td>
+              <td colspan="5"><strong>1 → 2:</strong> isolate parallel tasks; establish trusted tests, build, lint and end-to-end checks; encode standards in instructions and skills; automate review while retaining human approval.</td>
             </tr>
 
             <tr>
@@ -427,27 +427,27 @@
               <td>
                 <span class="pillars"><b>Application Security · Governance</b><span> · Architecture</span></span>
                 <ul>
-                  <li><a href="https://learn.github.com/well-architected/library/governance/recommendations/governing-agents/">Governing agents in GitHub Enterprise</a> — the closest direct match</li>
+                  <li><a href="https://learn.github.com/well-architected/library/governance/recommendations/governing-agents/">Governing agents in GitHub Enterprise</a> — scoped access and review controls</li>
                   <li>Review gates on agent output via CODEOWNERS and rulesets</li>
                   <li class="caveat"><strong>Anti-pattern:</strong> exempting agent pull requests from existing checks</li>
                 </ul>
               </td>
               <td>
-                <span class="pillars"><b>Performance Efficiency · Cost</b><span> · Reliability</span></span>
+                <span class="pillars"><b>Performance Efficiency · Cost Optimization</b><span> · Reliability</span></span>
                 <ul>
-                  <li>Scale horizontally; load test early and often</li>
+                  <li>Load test workload dependencies before raising concurrency</li>
                   <li>Retry, circuit breaker and bulkhead for throttled calls</li>
-                  <li>Credit and Actions burn becomes material</li>
+                  <li>Budget tokens, compute and retries within service quotas</li>
                 </ul>
               </td>
               <td>
-                <p><strong>Review capacity as a resource.</strong> The binding constraint here, yet neither framework prescribes review sampling or reviewer budgeting.</p>
-                <p class="caveat"><strong>Score to policy:</strong> no turnkey path from an assessment result to rulesets, Entra, DLP or Azure Policy.</p>
+                <p><strong>Review capacity.</strong> Limit parallel tasks to available reviewer capacity; check every final diff at this step.</p>
+                <p class="caveat"><strong>Enforcement:</strong> configure required checks, approval rules and tool permissions; record and review exceptions.</p>
               </td>
             </tr>
 
             <tr class="transition">
-              <td colspan="5"><strong>2 → 3:</strong> give agents a way to pull in context — code, wikis, discussions; raise review speed, since agents will touch other teams' code; break work into loops and routines; let agents start agents.</td>
+              <td colspan="5"><strong>2 → 3:</strong> provide scoped access to code, wikis and discussions; agree cross-team ownership and exception routing; establish trusted loops and permit agents to initiate bounded tasks.</td>
             </tr>
 
             <tr>
@@ -458,18 +458,18 @@
               </th>
               <td>
                 <p class="gloss">Delegating nearly everything once the decision is made about what to pursue. Managing outcomes instead of output.</p>
-                <p>“Did you read the code?” becomes “what context was the model missing?” <em>Bottleneck:</em> trust in the loop, and your team's decision throughput.</p>
+                <p>Agents proactively initiate routine work within approved scope. <em>Bottleneck:</em> trust in the loop and your team's decision throughput.</p>
               </td>
               <td>
                 <span class="pillars"><b>Governance</b><span> · Architecture · Productivity</span></span>
                 <ul>
                   <li><a href="https://learn.github.com/well-architected/library/governance/recommendations/agentic-governance-taxonomy/">Agentic governance taxonomy</a> — agent identity, action boundaries, provenance</li>
                   <li><a href="https://learn.github.com/well-architected/library/governance/recommendations/agentic-engineering-system-on-github/">Building an agentic engineering system</a></li>
-                  <li>Minimise the enterprise baseline; let orgs adapt within it</li>
+                  <li>Enforce enterprise safeguards; let teams configure within them</li>
                 </ul>
               </td>
               <td>
-                <span class="pillars"><b>Reliability · Operational Excellence</b><span> · Cost</span></span>
+                <span class="pillars"><b>Reliability · Operational Excellence</b><span> · Cost Optimization</span></span>
                 <ul>
                   <li>Mitigate single points of failure; failure-mode analysis</li>
                   <li>Holistic observability across agents, models and tools</li>
@@ -477,8 +477,8 @@
                 </ul>
               </td>
               <td>
-                <p><strong>Continuous recertification.</strong> Models, policies, residency and vendor terms change; neither defines expiry or material-change detection.</p>
-                <p class="caveat"><strong>Incident response:</strong> no common kill switch or forensic trail across GitHub, Azure agents and connected tools.</p>
+                <p><strong>Ongoing assurance.</strong> Use risk-calibrated oversight and session spot-checks; reassess behavior, access and approvals after material changes.</p>
+                <p class="caveat"><strong>Incident response:</strong> correlate audit logs and rehearse stop, containment and recovery across connected services.</p>
               </td>
             </tr>
 
@@ -490,31 +490,31 @@
               <th scope="row">
                 <span class="step">4: AI-native</span>
                 <span class="role">Steering by intent</span>
-                <span class="count">1,000+ agents</span>
+                <span class="count">~1,000+ agents</span>
               </th>
               <td>
                 <p class="gloss">Treating agents as you would a large team — setting goals and targets, adjusting guardrails at a scale level, and letting the system build, deploy and schedule agents on its own.</p>
-                <p>Most agents are started by other agents. You steer by intent and monitor by exception.</p>
+                <p>Most agents are started by other agents. <em>Bottleneck:</em> selecting valuable work and enforcing guardrails at scale.</p>
               </td>
               <td>
-                <span class="pillars"><span>Governance · Architecture · Collaboration</span></span>
+                <span class="pillars"><b>Governance · Architecture</b><span> · Collaboration</span></span>
                 <ul>
                   <li>Enterprise baseline with delegated organization autonomy</li>
-                  <li>GitHub stays the code, pull request and security system of record</li>
-                  <li class="caveat"><strong>Boundary:</strong> the framework covers platform adoption, not running an agent fleet</li>
+                  <li><a href="https://learn.github.com/well-architected/library/governance/recommendations/agentic-engineering-system-on-github/">Orchestrator and worker agents</a> within approved scope</li>
+                  <li>Risk-calibrated oversight and feedback into shared instructions</li>
                 </ul>
               </td>
               <td>
                 <span class="pillars"><b>All five pillars</b></span>
                 <ul>
-                  <li>The agent fabric is itself a workload</li>
-                  <li>Apply the full ten-area AI design set</li>
-                  <li>Entra, Purview, Monitor and Cost Management around it</li>
+                  <li>Treat Azure-hosted orchestration as a workload</li>
+                  <li>Apply AI design areas relevant to that workload</li>
+                  <li>Monitor reliability, performance, cost and recovery</li>
                 </ul>
               </td>
               <td>
-                <p><strong>Outcome and risk linkage.</strong> Both assess architectural quality, not business benefit or residual risk.</p>
-                <p class="caveat"><strong>Capacity:</strong> neither vendor offers a turnkey or capacity-guaranteed thousand-agent system.</p>
+                <p><strong>Outcomes and risk.</strong> Set business targets, accepted risk and accountable owners; measure benefits against operating costs.</p>
+                <p class="caveat"><strong>Capacity:</strong> validate quotas, concurrency, recovery and contractual limits for the chosen services.</p>
               </td>
             </tr>
           </tbody>
@@ -523,7 +523,7 @@
     </figure>
 
     <footer>
-      <p class="keynote"><strong>The structural mismatch.</strong> Neither framework defines a maturity model, adoption stages or crawl/walk/run levels — GitHub ships a checklist per pillar, Azure ships an assessment review. Both are point-in-time snapshots of a system that already exists. The steps supply the sequence the pillars leave out; the pillars supply the depth the steps do not. A high pillar score does not authorise the next step, and reaching the next step does not excuse a failed pillar.</p>
+      <p class="keynote"><strong>Different lenses.</strong> These steps describe delegation, not architectural certification. <a href="https://learn.microsoft.com/en-us/azure/well-architected/what-is-well-architected-framework#adopt-a-maturity-model">Azure has a five-level workload maturity model</a>; <a href="https://github.com/github/github-well-architected/blob/b5993b0a027a878ef6027709b7d6672a12b87411/content/library/governance/recommendations/agentic-governance-taxonomy.md#L74-L79">GitHub includes a governance maturity assessment</a>. Both guide design and ongoing improvement. This table suggests emphasis, not equivalent maturity levels or permission to increase autonomy.</p>
 
       <div>
         <h2>GitHub pillars</h2>
@@ -533,12 +533,12 @@
 
       <div>
         <h2>Azure pillars</h2>
-        <p>Reliability · Security · Cost Optimization · Operational Excellence · Performance Efficiency, plus a ten-area <a href="https://learn.microsoft.com/en-us/azure/well-architected/ai/get-started">AI workload</a> guidance set.</p>
+        <p><a href="https://learn.microsoft.com/en-us/azure/well-architected/pillars">Reliability · Security · Cost Optimization · Operational Excellence · Performance Efficiency</a>, plus applicable <a href="https://learn.microsoft.com/en-us/azure/well-architected/ai/get-started">AI workload guidance</a>.</p>
       </div>
 
       <div>
-        <h2>Where they divide</h2>
-        <p>Steps 0–2 are governed almost entirely by GitHub Well-Architected. Steps 3–4 cannot be: orchestration stops being a GitHub configuration problem and becomes an Azure workload.</p>
+        <h2>How to use both</h2>
+        <p>GitHub guidance remains relevant as delegation grows. Apply Azure guidance whenever Azure-hosted workloads are involved, including early steps. Review all applicable pillars throughout.</p>
       </div>
     </footer>
   </div>
