@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Steps of AI Adoption — Combined Well-Architected guidance</title>
+  <title>Steps of AI Adoption — One-page assessment</title>
   <script>
     (() => {
       const stored = (() => {
@@ -43,14 +43,11 @@
       --text: #fff6e6;
       --secondary: #b3c5cd;
       --background: #182c36;
-      --sidebar-bg: #142630;
       --link: #76dfff;
       --link-hover: #fff6e6;
       --rule: #537583;
       --rule-strong: #b3c5cd;
       --note-bg: #203d4b;
-      --mark: #76dfff;
-      --sidebar-width: 224px;
       --body-font: "IBM Plex Mono", Consolas, monospace;
       --display-font: "Bebas Neue", "Arial Narrow", sans-serif;
     }
@@ -60,13 +57,11 @@
       --text: #182c36;
       --secondary: #475f6a;
       --background: #f6fafb;
-      --sidebar-bg: #e7f1f5;
       --link: #006780;
       --link-hover: #182c36;
       --rule: #a0b9c4;
       --rule-strong: #475f6a;
       --note-bg: #e3eef3;
-      --mark: #006780;
     }
 
     * { box-sizing: border-box; }
@@ -81,8 +76,8 @@
       background: var(--background);
       color: var(--text);
       font-family: var(--body-font);
-      font-size: 14px;
-      line-height: 1.65;
+      font-size: 13px;
+      line-height: 1.5;
       -webkit-font-smoothing: antialiased;
     }
 
@@ -121,95 +116,24 @@
 
     .skip-link:focus { top: 16px; }
 
-    .sidebar {
-      position: fixed;
-      inset: 0 auto 0 0;
-      z-index: 10;
-      display: flex;
-      flex-direction: column;
-      width: var(--sidebar-width);
-      padding: 32px 20px 24px;
-      overflow-y: auto;
-      background: var(--sidebar-bg);
-      border-right: 1px dashed var(--rule-strong);
-    }
-
-    .site-name {
-      display: block;
-      font-family: var(--display-font);
-      font-size: 38px;
-      letter-spacing: 1px;
-      line-height: 1.1;
-      color: var(--text);
-    }
-
-    .sidebar-description {
-      margin-top: 12px;
-      color: var(--secondary);
-      font-size: 11px;
-    }
-
-    .step-nav {
-      display: grid;
-      gap: 8px;
-      margin: 32px 0;
-    }
-
-    .step-nav a {
-      display: grid;
-      grid-template-columns: 24px 1fr;
-      align-items: baseline;
-      gap: 8px;
-      min-height: 44px;
-      padding: 10px 8px;
-      border: 1px solid transparent;
-      font-size: 12px;
-      font-weight: 600;
-      line-height: 1.6;
-    }
-
-    .nav-index { color: var(--secondary); }
-
-    .step-nav a:hover,
-    .step-nav a[aria-current="location"] {
-      background: var(--note-bg);
-      border: 1px dashed var(--rule-strong);
-      color: var(--text);
-      text-decoration: none;
-    }
-
-    .step-nav a[aria-current="location"] .nav-index { color: var(--link); }
-
-    .sidebar-actions {
-      display: grid;
-      gap: 16px;
-      margin-top: auto;
-      padding-top: 20px;
-      border-top: 1px dashed var(--rule);
-      font-size: 11px;
-    }
-
     .sheet {
-      max-width: 1540px;
-      margin-left: var(--sidebar-width);
-      padding: 40px clamp(24px, 3vw, 48px) 48px;
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 16px 24px;
     }
 
     header {
-      margin-bottom: 32px;
-    }
-
-    .provenance {
-      max-width: 90ch;
-      margin: 16px 0 0;
-      color: var(--secondary);
-      font-size: 11px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 24px;
+      margin-bottom: 12px;
     }
 
     h1 {
-      margin: 0 0 16px;
+      margin: 0 0 6px;
       font-family: var(--display-font);
-      font-size: clamp(44px, 5vw, 72px);
+      font-size: 44px;
       font-weight: 400;
       letter-spacing: 1px;
       line-height: 1.05;
@@ -217,17 +141,22 @@
     }
 
     .standfirst {
-      max-width: 75ch;
+      max-width: 80ch;
       margin: 0;
-      font-size: 14px;
+      font-size: 13px;
       text-wrap: pretty;
     }
 
+    .page-actions {
+      display: flex;
+      flex-shrink: 0;
+      gap: 12px;
+    }
+
     figcaption {
-      max-width: 95ch;
-      margin-bottom: 16px;
+      margin-bottom: 10px;
       color: var(--secondary);
-      font-size: 11px;
+      font-size: 12px;
     }
 
     figcaption .label {
@@ -237,32 +166,40 @@
 
     figure { margin: 0; }
 
+    .table-scroll {
+      overflow-x: auto;
+      overscroll-behavior-x: contain;
+    }
+
+    .scroll-hint { display: none; }
+
     table {
       width: 100%;
+      min-width: 1000px;
       border-collapse: collapse;
       table-layout: fixed;
-      font-size: 12px;
-      line-height: 1.65;
+      font-size: 13px;
+      line-height: 1.5;
       text-align: left;
     }
 
     thead th {
-      padding: 12px 10px;
+      padding: 10px 12px;
       border-top: 1px dashed var(--rule-strong);
       border-bottom: 1px dashed var(--rule-strong);
       color: var(--link);
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 600;
       vertical-align: bottom;
     }
 
     tbody td,
     tbody th {
-      padding: 20px 10px;
+      padding: 12px;
       border-bottom: 1px solid var(--rule);
       font-weight: 400;
       vertical-align: top;
-      overflow-wrap: anywhere;
+      overflow-wrap: break-word;
     }
 
     .stage-row { scroll-margin-top: 24px; }
@@ -274,21 +211,12 @@
       border-bottom: 1px dashed var(--rule-strong);
     }
 
-    tr.transition td {
-      padding: 10px 12px;
-      background: var(--note-bg);
-      color: var(--secondary);
-      font-size: 11px;
-    }
-
-    tr.transition strong { color: var(--link); }
-
     .step {
       display: block;
-      margin-bottom: 8px;
+      margin-bottom: 4px;
       font-family: var(--display-font);
       font-weight: 400;
-      font-size: 28px;
+      font-size: 24px;
       letter-spacing: 0.5px;
       line-height: 1.1;
     }
@@ -297,76 +225,73 @@
     .count {
       display: block;
       color: var(--secondary);
-      font-size: 11px;
+      font-size: 12px;
     }
 
     .count {
-      margin-top: 8px;
+      margin-top: 4px;
       color: var(--link);
       font-variant-numeric: tabular-nums;
     }
 
-    p { margin: 0 0 10px; }
+    p { margin: 0 0 6px; }
     p:last-child { margin-bottom: 0; }
 
-    .gloss { font-style: italic; }
-
-    ul {
-      margin: 0;
-      padding-left: 14px;
+    .next-step {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--link);
     }
 
-    li { margin-bottom: 8px; }
-    li:last-child { margin-bottom: 0; }
-
-    .caveat { color: var(--secondary); }
-    .caveat strong { color: var(--mark); }
-
-    col.c-step { width: 13%; }
-    col.c-looks { width: 26%; }
-    col.c-guidance { width: 34%; }
-    col.c-gap { width: 27%; }
+    col.c-step { width: 14%; }
+    col.c-pattern { width: 22%; }
+    col.c-bottleneck { width: 14%; }
+    col.c-guardrails { width: 25%; }
+    col.c-evidence { width: 25%; }
 
     footer {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 24px;
-      margin-top: 32px;
+      margin-top: 8px;
       color: var(--secondary);
-      font-size: 11px;
-      line-height: 1.7;
-      scroll-margin-top: 24px;
-    }
-
-    footer h2 {
-      margin: 0 0 10px;
-      color: var(--text);
-      font-family: var(--display-font);
-      font-size: 26px;
-      font-weight: 400;
-      letter-spacing: 0.5px;
-      line-height: 1.1;
-    }
-
-    footer p { margin: 0 0 8px; }
-
-    .keynote {
-      grid-column: 1 / -1;
-      padding: 16px;
-      border: 1px dashed var(--rule-strong);
-      color: var(--text);
       font-size: 12px;
     }
 
-    .keynote strong { color: var(--mark); }
+    .assessment-note { margin-bottom: 6px; }
 
-    .design-credit {
-      grid-column: 1 / -1;
-      margin-top: 4px;
-      font-size: 10px;
+    .sources summary {
+      display: list-item;
+      width: fit-content;
+      min-height: 44px;
+      padding: 10px 4px;
+      color: var(--link);
+      font-size: 12px;
+      cursor: pointer;
     }
 
-    .theme-button {
+    .sources summary:hover { color: var(--link-hover); }
+
+    .sources-content {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px 24px;
+      padding: 16px;
+      background: var(--note-bg);
+      border: 1px dashed var(--rule);
+    }
+
+    .sources-content h2 {
+      margin: 0 0 8px;
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .sources-content p { max-width: 80ch; }
+
+    .source-context { grid-column: 1 / -1; }
+
+    .print-sources { display: none; }
+
+    .action-button {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -381,7 +306,7 @@
       cursor: pointer;
     }
 
-    .theme-button:hover {
+    .action-button:hover {
       background: var(--note-bg);
       border-style: solid;
       color: var(--text);
@@ -397,116 +322,20 @@
     html[data-theme="dark"] .moon-icon,
     html:not([data-theme="dark"]) .sun-icon { display: none; }
 
-    @media screen and (max-width: 1100px) {
-      html { scroll-padding-top: 136px; }
-
-      .sidebar {
-        position: sticky;
-        inset: 0 0 auto;
-        display: grid;
-        grid-template-columns: 1fr auto;
-        gap: 12px;
-        width: 100%;
-        padding: 12px 20px;
-        overflow: visible;
-        border-right: 0;
-        border-bottom: 1px dashed var(--rule-strong);
-      }
-
-      .site-name { font-size: 28px; }
-      .sidebar-description { display: none; }
-      .sidebar-header { align-self: center; }
-
-      .sidebar-actions {
-        grid-column: 2;
-        grid-row: 1;
-        display: flex;
-        align-items: center;
-        gap: 16px;
-        margin: 0;
-        padding: 0;
-        border: 0;
-      }
-
-      .step-nav {
-        grid-column: 1 / -1;
-        grid-row: 2;
-        display: flex;
-        gap: 8px;
-        margin: 0;
-      }
-
-      .step-nav a {
-        flex: 1;
-        align-items: center;
-        padding: 6px 8px;
-        font-size: 11px;
-      }
-
-      .sheet {
-        margin-left: 0;
-        padding: 32px 24px;
-      }
-
-      .stage-row, footer { scroll-margin-top: 16px; }
-
-      table, tbody, tr, th, td { display: block; }
-
-      thead {
-        position: absolute;
-        width: 1px;
-        height: 1px;
-        overflow: hidden;
-        clip-path: inset(50%);
-      }
-
-      .stage-row {
-        padding: 24px 0;
-        border-top: 1px dashed var(--rule-strong);
-      }
-
-      .stage-row th,
-      .stage-row td,
-      tbody tr:last-child th,
-      tbody tr:last-child td {
-        padding: 0;
-        border: 0;
-      }
-
-      .stage-row td {
-        margin-top: 20px;
-        font-size: 13px;
-      }
-
-      .stage-row td::before {
-        content: attr(data-label);
+    @media screen and (max-width: 1047px) {
+      .scroll-hint {
         display: block;
-        margin-bottom: 8px;
-        color: var(--link);
+        margin-bottom: 10px;
+        color: var(--secondary);
         font-size: 12px;
-        font-weight: 600;
       }
-
-      .step { font-size: 34px; }
-      .role, .count { display: inline-block; margin: 0 12px 0 0; }
-
-      tr.transition td {
-        padding: 14px;
-        border: 0;
-        font-size: 11px;
-      }
-
-      footer { grid-template-columns: 1fr; }
     }
 
     @media screen and (max-width: 700px) {
-      .nav-label, .theme-label { display: none; }
-      .sidebar { padding: 12px 16px; }
-      .step-nav a { display: flex; justify-content: center; }
-      .nav-index { color: inherit; font-size: 14px; }
-      .sheet { padding: 28px 16px; }
-      h1 { font-size: 48px; }
-      .standfirst { font-size: 13px; }
+      .sheet { padding: 16px; }
+      header { flex-direction: column; gap: 12px; }
+      h1 { font-size: 36px; }
+      .sources-content { grid-template-columns: 1fr; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -527,88 +356,72 @@
         --rule: #000000;
         --rule-strong: #55504a;
         --note-bg: #f2f0ed;
-        --mark: #000000;
         --link: #000000;
       }
 
-      body { font-family: Arial, Helvetica, sans-serif; font-size: 8pt; line-height: 1.35; }
-      .sidebar, .skip-link, .design-credit { display: none; }
+      body { font-family: Arial, Helvetica, sans-serif; font-size: 9pt; line-height: 1.4; }
+      .page-actions, .skip-link, .sources, .scroll-hint { display: none; }
       .sheet { max-width: 100%; margin: 0; padding: 0; }
       header { margin-bottom: 3mm; }
-      .provenance { max-width: none; margin-top: 1mm; font-size: 6pt; }
-      h1 { margin-bottom: 1.5mm; font: bold 16pt Arial, sans-serif; letter-spacing: 0; }
-      .standfirst { max-width: none; font-size: 7.5pt; }
-      figcaption { max-width: none; margin-bottom: 1.2mm; font-size: 6.8pt; }
-      figure { margin-bottom: 3mm; }
-      table { font-size: 7pt; line-height: 1.35; }
-      thead th { padding: 1mm 1.5mm; font-size: 7pt; }
-      tbody td, tbody th { padding: 1.5mm; }
+      h1 { margin-bottom: 2mm; font: bold 18pt Arial, sans-serif; letter-spacing: 0; }
+      .standfirst { max-width: none; font-size: 10pt; }
+      figcaption { margin-bottom: 2mm; font-size: 9pt; }
+      .table-scroll { overflow: visible; }
+      table { min-width: 0; font-size: 10pt; line-height: 1.4; }
+      thead th { padding: 2mm; font-size: 9pt; }
+      tbody td, tbody th { padding: 3mm 2mm; }
       tr { break-inside: avoid; }
-      tr.transition td { padding: 1mm 1.5mm; font-size: 6.5pt; }
-      .step { margin-bottom: 1mm; font: bold 8pt Arial, sans-serif; letter-spacing: 0; }
-      .role, .count { margin: 0; font-size: 6.5pt; }
-      p { margin-bottom: 1mm; }
-      li { margin-bottom: 1mm; }
-      footer { margin-top: 3mm; font-size: 6.5pt; gap: 3mm; line-height: 1.4; }
-      footer h2 { margin-bottom: 1mm; font: bold 8pt Arial, sans-serif; letter-spacing: 0; }
-      footer p { margin-bottom: 1mm; }
-      .keynote { padding: 2mm; font-size: 7pt; }
+      .step { margin-bottom: 1mm; font: bold 11pt Arial, sans-serif; letter-spacing: 0; }
+      .role, .count { margin: 0; font-size: 9pt; }
+      p { margin-bottom: 1.5mm; }
+      footer { margin-top: 3mm; font-size: 9pt; }
+      .print-sources { display: block; font-size: 8pt; }
       a { color: inherit; }
     }
   </style>
 </head>
 <body>
-  <a class="skip-link" href="#main-content">Skip to the guide</a>
-  <aside class="sidebar">
-    <div class="sidebar-header">
-      <a class="site-name" href="#main-content">AI Adoption</a>
-      <p class="sidebar-description">Five steps of delegation.<br>One practical guide.</p>
-    </div>
-    <nav class="step-nav" aria-label="Jump to an adoption step">
-      <a href="#step-0" aria-label="Step 0: Gated" aria-current="location"><span class="nav-index">0</span><span class="nav-label">Gated</span></a>
-      <a href="#step-1" aria-label="Step 1: Assisted"><span class="nav-index">1</span><span class="nav-label">Assisted</span></a>
-      <a href="#step-2" aria-label="Step 2: Parallel"><span class="nav-index">2</span><span class="nav-label">Parallel</span></a>
-      <a href="#step-3" aria-label="Step 3: Supervised autonomy"><span class="nav-index">3</span><span class="nav-label">Supervised autonomy</span></a>
-      <a href="#step-4" aria-label="Step 4: AI-native"><span class="nav-index">4</span><span class="nav-label">AI-native</span></a>
-    </nav>
-    <div class="sidebar-actions">
-      <button class="theme-button" id="theme-toggle" type="button" aria-label="Switch to light mode" title="Switch to light mode">
-        <svg class="theme-icon moon-icon" viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M20.2 15.3A8.5 8.5 0 0 1 8.7 3.8 8.5 8.5 0 1 0 20.2 15.3Z" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
-        </svg>
-        <svg class="theme-icon sun-icon" viewBox="0 0 24 24" aria-hidden="true">
-          <circle cx="12" cy="12" r="3.8" stroke-width="1.8"></circle>
-          <path d="M12 2.5V5M12 19v2.5M4.6 4.6l1.8 1.8M17.6 17.6l1.8 1.8M2.5 12H5M19 12h2.5M4.6 19.4l1.8-1.8M17.6 6.4l1.8-1.8" stroke-width="1.8" stroke-linecap="round"></path>
-        </svg>
-        <span class="theme-label">Light theme</span>
-      </button>
-      <a href="#sources">Sources</a>
-    </div>
-  </aside>
-
+  <a class="skip-link" href="#main-content">Skip to the assessment</a>
   <main class="sheet" id="main-content" tabindex="-1">
     <header>
-      <h1>Steps of AI Adoption</h1>
-      <p class="standfirst">Five steps of delegation, adapted from the supplied Boris Cherny excerpt, with combined GitHub and Azure Well-Architected guidance. The recommendations and transitions are our synthesis, not an official merged framework or certification.</p>
-      <p class="provenance">Independent mapping — not an official Microsoft, GitHub or joint recommendation · Updated 8 September 2026</p>
+      <div>
+        <h1>Steps of AI Adoption</h1>
+        <p class="standfirst">Match how your team works today, then discuss the evidence for your next step.</p>
+      </div>
+      <div class="page-actions">
+        <button class="action-button" id="print-page" type="button">Print / PDF</button>
+        <button class="action-button" id="theme-toggle" type="button" aria-label="Switch to light mode" title="Switch to light mode">
+          <svg class="theme-icon moon-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M20.2 15.3A8.5 8.5 0 0 1 8.7 3.8 8.5 8.5 0 1 0 20.2 15.3Z" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+          <svg class="theme-icon sun-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="3.8" stroke-width="1.8"></circle>
+            <path d="M12 2.5V5M12 19v2.5M4.6 4.6l1.8 1.8M17.6 17.6l1.8 1.8M2.5 12H5M19 12h2.5M4.6 19.4l1.8-1.8M17.6 6.4l1.8-1.8" stroke-width="1.8" stroke-linecap="round"></path>
+          </svg>
+          <span class="theme-label">Light theme</span>
+        </button>
+      </div>
     </header>
 
     <figure>
-      <figcaption id="table-note"><span class="label">Reading the guide.</span> Agent counts are illustrative, not thresholds or guarantees. Recommendations combine both frameworks; all applicable pillars remain relevant at every step.</figcaption>
-      <div class="scroll">
-        <table role="table" aria-describedby="table-note">
+      <figcaption id="table-note"><span class="label">Boris Cherny’s five steps.</span> Combined GitHub + Azure guardrails and evidence prompts are our interpretation. Agent counts are illustrative, not maturity thresholds.</figcaption>
+      <p class="scroll-hint" id="scroll-hint">Scroll the table sideways to compare all five columns.</p>
+      <div class="table-scroll" role="region" aria-label="AI adoption assessment table" tabindex="0">
+        <table aria-describedby="table-note">
           <colgroup>
             <col class="c-step">
-            <col class="c-looks">
-            <col class="c-guidance">
-            <col class="c-gap">
+            <col class="c-pattern">
+            <col class="c-bottleneck">
+            <col class="c-guardrails">
+            <col class="c-evidence">
           </colgroup>
           <thead>
             <tr>
-              <th scope="col">Step and role</th>
-              <th scope="col">What it looks like</th>
-              <th scope="col">Combined Well-Architected guidance</th>
-              <th scope="col">Implementation considerations</th>
+              <th scope="col">Step &amp; role</th>
+              <th scope="col">Working pattern</th>
+              <th scope="col">Bottleneck</th>
+              <th scope="col">Combined guardrails</th>
+              <th scope="col">Evidence to advance</th>
             </tr>
           </thead>
           <tbody>
@@ -617,25 +430,16 @@
                 <span class="step">0: Gated</span>
                 <span class="count">0 agents</span>
               </th>
-              <td data-label="What it looks like">
-                <p class="gloss">Just dipping your toes in.</p>
-                <p>Access is gated and there is no agreed path to host or operate agent-created work. <em>Bottleneck:</em> approval delays and unclear ownership.</p>
+              <td>AI use is gated by approvals, with no agreed path to deploy agent-created work.</td>
+              <td>Approvals, access and unclear ownership.</td>
+              <td>
+                <p>Approved models/tools; least privilege.</p>
+                <p>Data boundaries, budgets and ownership.</p>
               </td>
-              <td data-label="Combined Well-Architected guidance">
-                <ul>
-                  <li>Set enterprise policies, least-privilege access and approved model/tool boundaries.</li>
-                  <li><a href="https://learn.microsoft.com/en-us/azure/well-architected/ai/design-principles">Protect code and data</a>; assess threats and responsible-AI risks.</li>
-                  <li>Establish <a href="https://learn.github.com/well-architected/library/governance/recommendations/managing-ai-credits/">AI-credit budgets</a> and workload cost limits before rollout.</li>
-                </ul>
+              <td>
+                <strong class="next-step">0 → 1</strong>
+                Approved pilot, deployment path, budget and named reviewer.
               </td>
-              <td data-label="Implementation considerations">
-                <p><strong>Inventory and ownership.</strong> Record approved models, agents, MCP servers, owners and data classifications using existing inventory controls.</p>
-                <p class="caveat"><strong>Discovery:</strong> combine identity, endpoint and procurement signals to identify unapproved use.</p>
-              </td>
-            </tr>
-
-            <tr class="transition">
-              <td colspan="4"><strong>0 → 1:</strong> align executive sponsors and security owners; unblock approved pilots with clear data boundaries, least-privilege access, deployment paths, budgets and human-review requirements.</td>
             </tr>
 
             <tr class="stage-row" id="step-1" tabindex="-1">
@@ -644,25 +448,16 @@
                 <span class="role">You and an agent</span>
                 <span class="count">~1 agent</span>
               </th>
-              <td data-label="What it looks like">
-                <p class="gloss">Augmenting the work you are already doing, without significantly adapting your processes or delegating any work to agents.</p>
-                <p>One engineer, one agent, mostly supervised. You review almost every change before merge. <em>Bottleneck:</em> your attention.</p>
+              <td>One engineer, one agent. You supervise and review almost every change.</td>
+              <td>Your attention and trust in verification.</td>
+              <td>
+                <p>Tests, build, lint and security checks.</p>
+                <p>Human review; quality and cost baseline.</p>
               </td>
-              <td data-label="Combined Well-Architected guidance">
-                <ul>
-                  <li>Support <a href="https://learn.github.com/well-architected/library/productivity/recommendations/adopting-copilot-at-scale/">Copilot adoption</a> with champions and secure developer environments.</li>
-                  <li>Use automated tests, security checks and <a href="https://learn.microsoft.com/en-us/azure/well-architected/ai/get-started">AI evaluations</a> before deployment.</li>
-                  <li><a href="https://learn.github.com/well-architected/library/productivity/recommendations/engineering-system-metrics/">Baseline delivery and business outcomes</a> alongside quality and cost.</li>
-                </ul>
+              <td>
+                <strong class="next-step">1 → 2</strong>
+                Trusted end-to-end checks; isolated tasks and reviewer capacity.
               </td>
-              <td data-label="Implementation considerations">
-                <p><strong>Evidence.</strong> Combine usage metrics with quality, delivery, cost and incident evidence. Usage alone does not establish readiness.</p>
-                <p class="caveat"><strong>Assurance:</strong> configure independent review for changes and name an accountable owner for assessment sign-off.</p>
-              </td>
-            </tr>
-
-            <tr class="transition">
-              <td colspan="4"><strong>1 → 2:</strong> isolate parallel tasks; establish trusted tests, build, lint and end-to-end checks; encode standards in instructions and skills; automate review while retaining human approval.</td>
             </tr>
 
             <tr class="stage-row" id="step-2" tabindex="-1">
@@ -671,25 +466,16 @@
                 <span class="role">Orchestrator</span>
                 <span class="count">~10 agents</span>
               </th>
-              <td data-label="What it looks like">
-                <p class="gloss">Delegating a great deal of trust to a limited number of agents, but checking everything diligently.</p>
-                <p>Five to ten agents, each on its own worktree, self-checking before you see the work. You review final diffs. <em>Bottleneck:</em> review throughput.</p>
+              <td>Agents work in parallel and self-check. You review every final diff.</td>
+              <td>Review throughput, task isolation and context.</td>
+              <td>
+                <p>Isolated worktrees; shared review rules.</p>
+                <p>Concurrency, retry and cost limits.</p>
               </td>
-              <td data-label="Combined Well-Architected guidance">
-                <ul>
-                  <li>Isolate parallel work; apply <a href="https://learn.github.com/well-architected/library/governance/recommendations/governing-agents/">the same review and security gates</a> to human and agent changes.</li>
-                  <li><a href="https://learn.microsoft.com/en-us/azure/well-architected/ai/design-principles">Load-test dependencies</a>, then cap concurrency against quotas and budgets.</li>
-                  <li>Bound retries; use circuit breakers and failure isolation for tool/model errors.</li>
-                </ul>
+              <td>
+                <strong class="next-step">2 → 3</strong>
+                Proven routines with scoped context, owners and tested escalation.
               </td>
-              <td data-label="Implementation considerations">
-                <p><strong>Review capacity.</strong> Limit parallel tasks to available reviewer capacity; check every final diff at this step.</p>
-                <p class="caveat"><strong>Enforcement:</strong> configure required checks, approval rules and tool permissions; record and review exceptions.</p>
-              </td>
-            </tr>
-
-            <tr class="transition">
-              <td colspan="4"><strong>2 → 3:</strong> provide scoped access to code, wikis and discussions; agree cross-team ownership and exception routing; establish trusted loops and permit agents to initiate bounded tasks.</td>
             </tr>
 
             <tr class="stage-row" id="step-3" tabindex="-1">
@@ -698,25 +484,16 @@
                 <span class="role">Manager of managers</span>
                 <span class="count">~100 agents</span>
               </th>
-              <td data-label="What it looks like">
-                <p class="gloss">Delegating nearly everything once the decision is made about what to pursue. Managing outcomes instead of output.</p>
-                <p>Agents proactively initiate routine work within approved scope. <em>Bottleneck:</em> trust in the loop and your team's decision throughput.</p>
+              <td>Agents delegate and initiate work within your goals. You manage outcomes and exceptions.</td>
+              <td>Trust in the loop and decision throughput.</td>
+              <td>
+                <p>Scoped agent identities; traces and evaluation.</p>
+                <p>Risk-based oversight; rehearsed stop and recovery.</p>
               </td>
-              <td data-label="Combined Well-Architected guidance">
-                <ul>
-                  <li>Keep <a href="https://learn.github.com/well-architected/library/governance/recommendations/agentic-engineering-system-on-github/">orchestrator and worker agents</a> within approved identity, tool and task boundaries.</li>
-                  <li>Trace agents, models and tools; evaluate changes and monitor cost.</li>
-                  <li>Design workflows for <a href="https://learn.microsoft.com/en-us/azure/well-architected/ai/design-principles">failure and recovery</a>, with accountable human escalation.</li>
-                </ul>
+              <td>
+                <strong class="next-step">3 → 4</strong>
+                Proven workflows, measured outcomes, tested recovery and authority limits.
               </td>
-              <td data-label="Implementation considerations">
-                <p><strong>Ongoing assurance.</strong> Use risk-calibrated oversight and session spot-checks; reassess behavior, access and approvals after material changes.</p>
-                <p class="caveat"><strong>Incident response:</strong> correlate audit logs and rehearse stop, containment and recovery across connected services.</p>
-              </td>
-            </tr>
-
-            <tr class="transition">
-              <td colspan="4"><strong>3 → 4:</strong> scale automation of domain-specific work — migration, fuzzing, feature-building, feedback remediation — behind a governed agent registry, durable state, continuous evaluation and explicit human authority over irreversible actions.</td>
             </tr>
 
             <tr class="stage-row" id="step-4" tabindex="-1">
@@ -725,20 +502,15 @@
                 <span class="role">Steering by intent</span>
                 <span class="count">~1,000+ agents</span>
               </th>
-              <td data-label="What it looks like">
-                <p class="gloss">Treating agents as you would a large team — setting goals and targets, adjusting guardrails at a scale level, and letting the system build, deploy and schedule agents on its own.</p>
-                <p>Most agents are started by other agents. <em>Bottleneck:</em> selecting valuable work and enforcing guardrails at scale.</p>
+              <td>You set goals and guardrails; agents build, deploy and schedule agents. You monitor exceptions.</td>
+              <td>Selecting valuable work and governing at scale.</td>
+              <td>
+                <p>Policy-bound delegation; evaluations.</p>
+                <p>Service/cost limits; human accountability.</p>
               </td>
-              <td data-label="Combined Well-Architected guidance">
-                <ul>
-                  <li>Delegate goals within enterprise policy and explicit human authority.</li>
-                  <li>Operate orchestration as a <a href="https://learn.microsoft.com/en-us/azure/well-architected/ai/get-started">workload</a> with reliability, security, performance and cost targets.</li>
-                  <li>Use <a href="https://learn.github.com/well-architected/library/governance/recommendations/agentic-engineering-system-on-github/">risk-calibrated oversight</a> and continuous evaluation; feed outcomes into shared instructions.</li>
-                </ul>
-              </td>
-              <td data-label="Implementation considerations">
-                <p><strong>Outcomes and risk.</strong> Set business targets, accepted risk and accountable owners; measure benefits against operating costs.</p>
-                <p class="caveat"><strong>Capacity:</strong> validate quotas, concurrency, recovery and contractual limits for the chosen services.</p>
+              <td>
+                <strong class="next-step">Sustain this step</strong>
+                Proven value, accepted risk and recovery within service and cost limits.
               </td>
             </tr>
           </tbody>
@@ -746,25 +518,30 @@
       </div>
     </figure>
 
-    <footer id="sources" tabindex="-1">
-      <p class="keynote"><strong>Combined guidance, distinct frameworks.</strong> <a href="https://learn.microsoft.com/en-us/azure/well-architected/what-is-well-architected-framework#adopt-a-maturity-model">Azure publishes a five-level workload maturity model</a> and <a href="https://github.com/github/github-well-architected/blob/b5993b0a027a878ef6027709b7d6672a12b87411/content/library/governance/recommendations/agentic-governance-taxonomy.md#L74-L79">GitHub includes a governance maturity assessment</a>. This synthesis does not equate those maturity levels with Boris’s delegation steps or authorise increased autonomy.</p>
-
-      <div>
-        <h2>GitHub pillars</h2>
-        <p>Productivity · Collaboration · Application Security · Governance · Architecture.</p>
-        <p><a href="https://learn.github.com/well-architected/">learn.github.com/well-architected</a></p>
-      </div>
-
-      <div>
-        <h2>Azure pillars</h2>
-        <p><a href="https://learn.microsoft.com/en-us/azure/well-architected/pillars">Reliability · Security · Cost Optimization · Operational Excellence · Performance Efficiency</a>, plus applicable <a href="https://learn.microsoft.com/en-us/azure/well-architected/ai/get-started">AI workload guidance</a>.</p>
-      </div>
-
-      <div>
-        <h2>How to use both</h2>
-        <p>GitHub guidance remains relevant as delegation grows. Apply Azure guidance whenever Azure-hosted workloads are involved, including early steps. Review all applicable pillars throughout.</p>
-      </div>
-      <p class="design-credit">Visual direction inspired by <a href="https://2025.stateofai.dev/en-US/models/">State of AI 2025</a>. Independent content; no affiliation.</p>
+    <footer>
+      <p class="assessment-note">Discussion prompts, not a score or certification. Agree evidence and acceptable risk for each workflow; all applicable pillars remain relevant.</p>
+      <details class="sources" id="sources">
+        <summary>Sources &amp; interpretation</summary>
+        <div class="sources-content">
+          <div>
+            <h2>GitHub Well-Architected</h2>
+            <p><a href="https://learn.github.com/well-architected/">Productivity · Collaboration · Application Security · Governance · Architecture.</a></p>
+            <p><a href="https://learn.github.com/well-architected/library/governance/recommendations/governing-agents/">Agent governance</a>, <a href="https://learn.github.com/well-architected/library/governance/recommendations/agentic-engineering-system-on-github/">orchestration and review</a>, <a href="https://learn.github.com/well-architected/library/governance/recommendations/managing-ai-credits/">AI-credit controls</a> and <a href="https://learn.github.com/well-architected/library/productivity/recommendations/engineering-system-metrics/">outcome measurement</a>.</p>
+          </div>
+          <div>
+            <h2>Azure Well-Architected</h2>
+            <p><a href="https://learn.microsoft.com/en-us/azure/well-architected/pillars">Reliability · Security · Cost Optimization · Operational Excellence · Performance Efficiency.</a></p>
+            <p><a href="https://learn.microsoft.com/en-us/azure/well-architected/ai/design-principles">AI design principles</a> and <a href="https://learn.microsoft.com/en-us/azure/well-architected/ai/get-started">workload guidance</a> apply when Azure-hosted workloads are involved, at any delegation step.</p>
+          </div>
+          <div class="source-context">
+            <h2>Different lenses, not equivalent levels</h2>
+            <p><a href="https://learn.microsoft.com/en-us/azure/well-architected/what-is-well-architected-framework#adopt-a-maturity-model">Azure has a five-level workload maturity model</a>; <a href="https://github.com/github/github-well-architected/blob/b5993b0a027a878ef6027709b7d6672a12b87411/content/library/governance/recommendations/agentic-governance-taxonomy.md#L74-L79">GitHub includes a governance maturity assessment</a>. Neither is equated with the delegation steps here. GitHub guidance remains relevant as autonomy grows.</p>
+            <p>Steps are adapted from the supplied Boris Cherny “Steps of AI Adoption” excerpt, dated 16 July 2026; the original publication has not been independently verified. Guardrails and evidence prompts are an independent synthesis, not an official Microsoft or GitHub recommendation or an exhaustive checklist.</p>
+            <p>Updated 13 September 2026. Visual direction inspired by <a href="https://2025.stateofai.dev/en-US/models/">State of AI 2025</a>; no affiliation.</p>
+          </div>
+        </div>
+      </details>
+      <p class="print-sources">Independent synthesis after the supplied Boris Cherny excerpt · Sources: <a href="https://learn.github.com/well-architected/">GitHub Well-Architected</a> and <a href="https://learn.microsoft.com/en-us/azure/well-architected/pillars">Azure Well-Architected</a> · Updated 13 September 2026.</p>
     </footer>
   </main>
 
@@ -788,41 +565,7 @@
       updateThemeButton();
     });
 
-    const stepLinks = [...document.querySelectorAll(".step-nav a")];
-    const steps = stepLinks.map((link) => document.getElementById(link.hash.slice(1)));
-    const sidebar = document.querySelector(".sidebar");
-
-    const updateCurrentStep = () => {
-      const compact = window.matchMedia("(max-width: 1100px)").matches;
-      const offset = compact ? sidebar.getBoundingClientRect().height + 48 : 64;
-      let current = steps[0].id;
-      for (const step of steps) {
-        if (step.getBoundingClientRect().top <= offset) current = step.id;
-      }
-      if (window.scrollY > 0 && Math.ceil(window.scrollY + window.innerHeight) >= document.documentElement.scrollHeight) {
-        current = steps[steps.length - 1].id;
-      }
-      stepLinks.forEach((link) => {
-        if (link.hash === `#${current}`) link.setAttribute("aria-current", "location");
-        else link.removeAttribute("aria-current");
-      });
-    };
-
-    let navigationUpdatePending = false;
-    const scheduleNavigationUpdate = () => {
-      if (navigationUpdatePending) return;
-      navigationUpdatePending = true;
-      requestAnimationFrame(() => {
-        navigationUpdatePending = false;
-        updateCurrentStep();
-      });
-    };
-
-    window.addEventListener("scroll", scheduleNavigationUpdate, { passive: true });
-    window.addEventListener("resize", scheduleNavigationUpdate);
-    window.addEventListener("hashchange", scheduleNavigationUpdate);
-    document.fonts.ready.then(updateCurrentStep);
-    updateCurrentStep();
+    document.getElementById("print-page").addEventListener("click", () => window.print());
   </script>
 </body>
 </html>
