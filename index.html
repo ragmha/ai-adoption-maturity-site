@@ -9,59 +9,40 @@
       const stored = (() => {
         try { return localStorage.getItem("theme"); } catch (error) { return null; }
       })();
-      const theme = stored === "light" || stored === "dark" ? stored : "dark";
+      const theme = stored === "light" || stored === "dark" ? stored : "light";
       document.documentElement.setAttribute("data-theme", theme);
     })();
   </script>
   <style>
-    @font-face {
-      font-family: "Bebas Neue";
-      font-style: normal;
-      font-weight: 400;
-      font-display: swap;
-      src: url("assets/fonts/bebas-neue-regular.ttf") format("truetype");
-    }
-
-    @font-face {
-      font-family: "IBM Plex Mono";
-      font-style: normal;
-      font-weight: 400;
-      font-display: swap;
-      src: url("assets/fonts/ibm-plex-mono-regular.ttf") format("truetype");
-    }
-
-    @font-face {
-      font-family: "IBM Plex Mono";
-      font-style: normal;
-      font-weight: 600;
-      font-display: swap;
-      src: url("assets/fonts/ibm-plex-mono-semibold.ttf") format("truetype");
-    }
-
     :root {
-      color-scheme: dark;
-      --text: #fff6e6;
-      --secondary: #b3c5cd;
-      --background: #182c36;
-      --link: #76dfff;
-      --link-hover: #fff6e6;
-      --rule: #537583;
-      --rule-strong: #b3c5cd;
-      --note-bg: #203d4b;
-      --body-font: "IBM Plex Mono", Consolas, monospace;
-      --display-font: "Bebas Neue", "Arial Narrow", sans-serif;
+      color-scheme: light;
+      --text: #1f2937;
+      --heading: #183954;
+      --secondary: #475569;
+      --background: #ffffff;
+      --link: #164e87;
+      --link-hover: #102f50;
+      --rule: #cbd5e1;
+      --rule-strong: #64748b;
+      --header-bg: #edf2f7;
+      --stripe-bg: #f8fafc;
+      --note-bg: #f3f6fa;
+      --body-font: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
     }
 
-    html[data-theme="light"] {
-      color-scheme: light;
-      --text: #182c36;
-      --secondary: #475f6a;
-      --background: #f6fafb;
-      --link: #006780;
-      --link-hover: #182c36;
-      --rule: #a0b9c4;
-      --rule-strong: #475f6a;
-      --note-bg: #e3eef3;
+    html[data-theme="dark"] {
+      color-scheme: dark;
+      --text: #e8edf3;
+      --heading: #dbe7f5;
+      --secondary: #bac6d4;
+      --background: #18212d;
+      --link: #b8d4f5;
+      --link-hover: #ffffff;
+      --rule: #475569;
+      --rule-strong: #94a3b8;
+      --header-bg: #263446;
+      --stripe-bg: #1f2b3b;
+      --note-bg: #263446;
     }
 
     * { box-sizing: border-box; }
@@ -76,7 +57,7 @@
       background: var(--background);
       color: var(--text);
       font-family: var(--body-font);
-      font-size: 13px;
+      font-size: 14px;
       line-height: 1.5;
       -webkit-font-smoothing: antialiased;
     }
@@ -85,7 +66,7 @@
 
     a {
       color: var(--link);
-      text-decoration: none;
+      text-decoration: underline;
       text-underline-offset: 3px;
     }
 
@@ -132,18 +113,18 @@
 
     h1 {
       margin: 0 0 6px;
-      font-family: var(--display-font);
-      font-size: 44px;
-      font-weight: 400;
-      letter-spacing: 1px;
-      line-height: 1.05;
+      color: var(--heading);
+      font-size: 30px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
       text-wrap: balance;
     }
 
     .standfirst {
       max-width: 80ch;
       margin: 0;
-      font-size: 13px;
+      font-size: 14px;
       text-wrap: pretty;
     }
 
@@ -156,7 +137,7 @@
     figcaption {
       margin-bottom: 10px;
       color: var(--secondary);
-      font-size: 12px;
+      font-size: 13px;
     }
 
     figcaption .label {
@@ -178,17 +159,18 @@
       min-width: 1000px;
       border-collapse: collapse;
       table-layout: fixed;
-      font-size: 13px;
+      font-size: 14px;
       line-height: 1.5;
       text-align: left;
     }
 
     thead th {
       padding: 10px 12px;
-      border-top: 1px dashed var(--rule-strong);
-      border-bottom: 1px dashed var(--rule-strong);
-      color: var(--link);
-      font-size: 12px;
+      border-top: 1px solid var(--rule-strong);
+      border-bottom: 1px solid var(--rule-strong);
+      background: var(--header-bg);
+      color: var(--heading);
+      font-size: 13px;
       font-weight: 600;
       vertical-align: bottom;
     }
@@ -204,33 +186,33 @@
 
     .stage-row { scroll-margin-top: 24px; }
 
+    .stage-row:nth-child(even) { background: var(--stripe-bg); }
+
     .stage-row:target .step { color: var(--link); }
 
     tbody tr:last-child td,
     tbody tr:last-child th {
-      border-bottom: 1px dashed var(--rule-strong);
+      border-bottom: 1px solid var(--rule-strong);
     }
 
     .step {
       display: block;
       margin-bottom: 4px;
-      font-family: var(--display-font);
-      font-weight: 400;
-      font-size: 24px;
-      letter-spacing: 0.5px;
-      line-height: 1.1;
+      color: var(--heading);
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 1.35;
     }
 
     .role,
     .count {
       display: block;
       color: var(--secondary);
-      font-size: 12px;
+      font-size: 13px;
     }
 
     .count {
       margin-top: 4px;
-      color: var(--link);
       font-variant-numeric: tabular-nums;
     }
 
@@ -240,7 +222,7 @@
     .next-step {
       display: block;
       margin-bottom: 4px;
-      color: var(--link);
+      color: var(--heading);
     }
 
     col.c-step { width: 14%; }
@@ -252,10 +234,15 @@
     footer {
       margin-top: 8px;
       color: var(--secondary);
-      font-size: 12px;
+      font-size: 13px;
     }
 
     .assessment-note { margin-bottom: 6px; }
+
+    .reference-line {
+      margin-bottom: 4px;
+      font-size: 12px;
+    }
 
     .sources summary {
       display: list-item;
@@ -263,7 +250,7 @@
       min-height: 44px;
       padding: 10px 4px;
       color: var(--link);
-      font-size: 12px;
+      font-size: 13px;
       cursor: pointer;
     }
 
@@ -275,21 +262,19 @@
       gap: 16px 24px;
       padding: 16px;
       background: var(--note-bg);
-      border: 1px dashed var(--rule);
+      border: 1px solid var(--rule);
     }
 
     .sources-content h2 {
       margin: 0 0 8px;
       color: var(--text);
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 600;
     }
 
     .sources-content p { max-width: 80ch; }
 
     .source-context { grid-column: 1 / -1; }
-
-    .print-sources { display: none; }
 
     .action-button {
       display: flex;
@@ -299,9 +284,10 @@
       min-width: 44px;
       min-height: 44px;
       padding: 10px 12px;
-      border: 1px dashed var(--rule-strong);
+      border: 1px solid var(--rule-strong);
+      border-radius: 4px;
       background: transparent;
-      color: var(--link);
+      color: var(--heading);
       font: inherit;
       cursor: pointer;
     }
@@ -334,7 +320,7 @@
     @media screen and (max-width: 700px) {
       .sheet { padding: 16px; }
       header { flex-direction: column; gap: 12px; }
-      h1 { font-size: 36px; }
+      h1 { font-size: 28px; }
       .sources-content { grid-template-columns: 1fr; }
     }
 
@@ -351,11 +337,14 @@
       html, html[data-theme="dark"], html[data-theme="light"] {
         color-scheme: light;
         --text: #000000;
+        --heading: #000000;
         --secondary: #55504a;
         --background: #ffffff;
         --rule: #000000;
         --rule-strong: #55504a;
         --note-bg: #f2f0ed;
+        --header-bg: #edf2f7;
+        --stripe-bg: #f8fafc;
         --link: #000000;
       }
 
@@ -375,7 +364,7 @@
       .role, .count { margin: 0; font-size: 9pt; }
       p { margin-bottom: 1.5mm; }
       footer { margin-top: 3mm; font-size: 9pt; }
-      .print-sources { display: block; font-size: 8pt; }
+      .reference-line { font-size: 8pt; }
       a { color: inherit; }
     }
   </style>
@@ -390,7 +379,7 @@
       </div>
       <div class="page-actions">
         <button class="action-button" id="print-page" type="button">Print / PDF</button>
-        <button class="action-button" id="theme-toggle" type="button" aria-label="Switch to light mode" title="Switch to light mode">
+        <button class="action-button" id="theme-toggle" type="button" aria-label="Switch to dark mode" title="Switch to dark mode">
           <svg class="theme-icon moon-icon" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M20.2 15.3A8.5 8.5 0 0 1 8.7 3.8 8.5 8.5 0 1 0 20.2 15.3Z" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
           </svg>
@@ -398,13 +387,13 @@
             <circle cx="12" cy="12" r="3.8" stroke-width="1.8"></circle>
             <path d="M12 2.5V5M12 19v2.5M4.6 4.6l1.8 1.8M17.6 17.6l1.8 1.8M2.5 12H5M19 12h2.5M4.6 19.4l1.8-1.8M17.6 6.4l1.8-1.8" stroke-width="1.8" stroke-linecap="round"></path>
           </svg>
-          <span class="theme-label">Light theme</span>
+          <span class="theme-label">Dark theme</span>
         </button>
       </div>
     </header>
 
     <figure>
-      <figcaption id="table-note"><span class="label">Boris Cherny’s five steps.</span> Combined GitHub + Azure guardrails and evidence prompts are our interpretation. Agent counts are illustrative, not maturity thresholds.</figcaption>
+      <figcaption id="table-note"><span class="label">Assessment basis.</span> Five steps adapted from the supplied Boris Cherny excerpt. Combined GitHub and Azure guardrails are our interpretation; agent counts are illustrative.</figcaption>
       <p class="scroll-hint" id="scroll-hint">Scroll the table sideways to compare all five columns.</p>
       <div class="table-scroll" role="region" aria-label="AI adoption assessment table" tabindex="0">
         <table aria-describedby="table-note">
@@ -519,7 +508,8 @@
     </figure>
 
     <footer>
-      <p class="assessment-note">Discussion prompts, not a score or certification. Agree evidence and acceptable risk for each workflow; all applicable pillars remain relevant.</p>
+      <p class="assessment-note">Independent discussion guide, not an official recommendation or certification. Agree evidence and acceptable risk for each workflow; all applicable pillars remain relevant.</p>
+      <p class="reference-line">Framework references: <a href="https://learn.github.com/well-architected/">GitHub Well-Architected</a> · <a href="https://learn.microsoft.com/en-us/azure/well-architected/pillars">Azure Well-Architected</a> · Updated 13 September 2026.</p>
       <details class="sources" id="sources">
         <summary>Sources &amp; interpretation</summary>
         <div class="sources-content">
@@ -537,11 +527,9 @@
             <h2>Different lenses, not equivalent levels</h2>
             <p><a href="https://learn.microsoft.com/en-us/azure/well-architected/what-is-well-architected-framework#adopt-a-maturity-model">Azure has a five-level workload maturity model</a>; <a href="https://github.com/github/github-well-architected/blob/b5993b0a027a878ef6027709b7d6672a12b87411/content/library/governance/recommendations/agentic-governance-taxonomy.md#L74-L79">GitHub includes a governance maturity assessment</a>. Neither is equated with the delegation steps here. GitHub guidance remains relevant as autonomy grows.</p>
             <p>Steps are adapted from the supplied Boris Cherny “Steps of AI Adoption” excerpt, dated 16 July 2026; the original publication has not been independently verified. Guardrails and evidence prompts are an independent synthesis, not an official Microsoft or GitHub recommendation or an exhaustive checklist.</p>
-            <p>Updated 13 September 2026. Visual direction inspired by <a href="https://2025.stateofai.dev/en-US/models/">State of AI 2025</a>; no affiliation.</p>
           </div>
         </div>
       </details>
-      <p class="print-sources">Independent synthesis after the supplied Boris Cherny excerpt · Sources: <a href="https://learn.github.com/well-architected/">GitHub Well-Architected</a> and <a href="https://learn.microsoft.com/en-us/azure/well-architected/pillars">Azure Well-Architected</a> · Updated 13 September 2026.</p>
     </footer>
   </main>
 
